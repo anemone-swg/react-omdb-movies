@@ -1,0 +1,9 @@
+:root {
+  --scrollbar-thumb: var(--scrollbar-thumb-light);
+  --scrollbar-thumb-hover: var(--scrollbar-thumb-light-hover);
+}
+
+[data-theme="dark"] {
+  --scrollbar-thumb: var(--scrollbar-thumb-dark);
+  --scrollbar-thumb-hover: var(--scrollbar-thumb-dark-hover);
+}
