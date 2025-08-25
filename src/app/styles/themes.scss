@@ -2,10 +2,12 @@
   --scrollbar-thumb: var(--scrollbar-thumb-light);
   --scrollbar-thumb-hover: var(--scrollbar-thumb-light-hover);
   --background-color: var(--background-color-light);
+  --text-color: var(--text-color-light);
 }
 
 [data-theme="dark"] {
   --scrollbar-thumb: var(--scrollbar-thumb-dark);
   --scrollbar-thumb-hover: var(--scrollbar-thumb-dark-hover);
   --background-color: var(--background-color-dark);
+  --text-color: var(--text-color-dark);
 }

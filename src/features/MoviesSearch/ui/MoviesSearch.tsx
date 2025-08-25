@@ -1,5 +1,5 @@
 const MoviesSearch = () => {
-  return <div>search for movies..</div>;
+  return <div><p>search for movies..</p></div>;
 };
 
 export default MoviesSearch;

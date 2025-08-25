@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import App from "@/app/App";
+import App from "@/app/App.tsx";
 import { HomePage } from "@/pages/HomePage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
-import { Routes } from "@/shared/config/routes";
+import { Routes } from "@/shared/config/routes.ts";
 
 export const AppRouter = createBrowserRouter([
   {
