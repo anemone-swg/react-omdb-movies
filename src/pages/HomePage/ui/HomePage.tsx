@@ -1,11 +1,11 @@
 import { Navbar } from "@/widgets/Navbar";
-import { MoviesSearch } from "@/features/MoviesSearch";
+import { HomeContent } from "@/widgets/HomeContent";
 
 const HomePage = () => {
   return (
     <>
       <Navbar />
-      <MoviesSearch />
+      <HomeContent />
     </>
   );
 };
