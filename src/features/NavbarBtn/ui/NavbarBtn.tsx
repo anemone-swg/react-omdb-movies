@@ -25,7 +25,11 @@ export interface NavbarBtnProps {
 const NavbarBtn = ({ to, label, icon: Icon }: NavbarBtnProps): JSX.Element => (
   <NavLink
     to={to}
-    className="bg-button hover:bg-button-hover transition-colors text-white px-4 py-2 rounded flex items-center gap-2"
+    className={({ isActive }) =>
+      `px-4 py-2 rounded flex items-center gap-2 transition-colors ${
+        isActive ? "bg-button-hover" : "bg-button hover:bg-button-hover"
+      }`
+    }
   >
     <Icon className="w-5 h-5" />
     {label && <span>{label}</span>}
