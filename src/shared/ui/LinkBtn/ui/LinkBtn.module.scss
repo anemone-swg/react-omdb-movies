@@ -1,0 +1,80 @@
+.linkBtn {
+  position: relative;
+  display: inline-block;
+  width: 17rem;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  vertical-align: middle;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  background: transparent;
+  border: 0;
+
+  &__circle {
+    position: relative;
+    display: block;
+    width: 3rem;
+    height: 3rem;
+    margin: 0;
+    background: var(--background-color-button);
+    border-radius: 1.625rem;
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  }
+
+  &__icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #fff;
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  }
+
+  &__arrow {
+    left: 0.625rem;
+    width: 1.125rem;
+    height: 0.125rem;
+    background: none;
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+
+    &::before {
+      position: absolute;
+      top: -0.29rem;
+      right: 0.0625rem;
+      width: 0.625rem;
+      height: 0.625rem;
+      content: "";
+      border-top: 0.125rem solid #fff;
+      border-right: 0.125rem solid #fff;
+      transform: rotate(45deg);
+    }
+  }
+
+  &__btnText {
+    position: absolute;
+    inset: 0;
+    padding: 0.75rem 0;
+    margin-left: 1.85rem;
+    font-weight: 700;
+    line-height: 1.6;
+    color: var(--text-color);
+    text-align: center;
+    text-transform: uppercase;
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  }
+
+  &:hover {
+    .linkBtn__circle {
+      width: 100%;
+    }
+
+    .linkBtn__arrow {
+      background: #fff;
+      transform: translate(1rem, 0);
+    }
+  }
+}
+
+

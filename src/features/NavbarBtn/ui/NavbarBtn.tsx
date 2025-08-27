@@ -26,7 +26,7 @@ const NavbarBtn = ({ to, label, icon: Icon }: NavbarBtnProps): JSX.Element => (
   <NavLink
     to={to}
     className={({ isActive }) =>
-      `px-4 py-2 rounded flex items-center gap-2 transition-colors ${
+      `text-white px-4 py-2 rounded flex items-center gap-2 transition-colors ${
         isActive ? "bg-button-hover" : "bg-button hover:bg-button-hover"
       }`
     }
