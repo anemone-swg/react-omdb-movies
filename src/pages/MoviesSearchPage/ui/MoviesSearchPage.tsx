@@ -1,7 +1,9 @@
+import { SearchMoviesInput } from "@/features/SearchMoviesInput";
+
 const MoviesSearchPage = () => {
   return (
     <>
-      <p>Поиск фильмов...</p>
+      <SearchMoviesInput />
     </>
   );
 };
