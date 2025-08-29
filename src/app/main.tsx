@@ -1,17 +1,20 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
-import { ApiProvider } from "@reduxjs/toolkit/query/react";
+import { PersistGate } from "redux-persist/integration/react";
 import { AppRouter } from "@/app/providers/AppRouter";
 import { ThemeProvider } from "@/app/providers/ThemeProvider";
-import { baseApi } from "@/shared/api/rtkApi.ts";
+import { persistor, store } from "@/app/store/store";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider>
-      <ApiProvider api={baseApi}>
-        <RouterProvider router={AppRouter} />
-      </ApiProvider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <RouterProvider router={AppRouter} />
+        </PersistGate>
+      </Provider>
     </ThemeProvider>
   </StrictMode>,
 );
