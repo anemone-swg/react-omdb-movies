@@ -1,16 +1,34 @@
-import { useState } from "react";
-import { useGetMoviesQuery } from "../api/api.ts";
+import { type Dispatch, type JSX, type SetStateAction, useState } from "react";
+import { useDispatch } from "react-redux";
+import { paginationActions } from "@/features/Pagination";
 
-const SearchMoviesInput = () => {
+/**
+ * Props компонента SearchMoviesInput.
+ *
+ * @property {Dispatch<SetStateAction<string>>} setSearch - Функция для изменения строки поиска.
+ */
+export interface SearchMoviesInputProps {
+  setSearch: Dispatch<SetStateAction<string>>;
+}
+
+/**
+ * React-компонент, отображающий input и кнопку для поиска фильмов.
+ *
+ * @component
+ * @param {SearchMoviesInputProps} props - Props компонента.
+ * @returns {JSX.Element} JSX-элемент с полем ввода и кнопкой поиска фильмов.
+ */
+const SearchMoviesInput = ({
+  setSearch,
+}: SearchMoviesInputProps): JSX.Element => {
+  const dispatch = useDispatch();
   const [query, setQuery] = useState("");
-  const [search, setSearch] = useState("");
-
-  const { data, isFetching, error } = useGetMoviesQuery(search, {
-    skip: !search,
-  });
 
   const handleSearch = () => {
-    setSearch(query);
+    const trimmed = query.trim();
+    if (!trimmed) return;
+    dispatch(paginationActions.setPage(1));
+    setSearch(trimmed);
   };
 
   return (
@@ -25,35 +43,11 @@ const SearchMoviesInput = () => {
           onChange={(e) => setQuery(e.target.value)}
         />
         <button
-          className="bg-button hover:bg-button-hover text-white px-4 py-2 rounded flex items-center gap-2 transition-colors"
+          className="bg-button hover:bg-button-hover text-white px-4 py-2 rounded transition-colors"
           onClick={handleSearch}
         >
           Найти
         </button>
-      </div>
-
-      {isFetching && <p>Загрузка...</p>}
-      {error && <p className="text-red-500">Ошибка при загрузке</p>}
-
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {data?.Search?.map((movie) => (
-          <div
-            key={movie.imdbID}
-            className="border rounded-lg overflow-hidden shadow"
-          >
-            <img
-              src={movie.Poster !== "N/A" ? movie.Poster : "/no-image.jpg"}
-              alt={movie.Title}
-              className="w-full h-64 object-cover"
-            />
-            <div className="p-2">
-              <h2 className="font-bold">{movie.Title}</h2>
-              <p className="text-sm text-gray-500">
-                {movie.Year} ({movie.Type})
-              </p>
-            </div>
-          </div>
-        ))}
       </div>
     </>
   );

@@ -1,9 +1,9 @@
-import { SearchMoviesInput } from "@/features/SearchMoviesInput";
+import { SearchMoviesContent } from "@/widgets/SearchMoviesContent";
 
 const MoviesSearchPage = () => {
   return (
     <>
-      <SearchMoviesInput />
+      <SearchMoviesContent />
     </>
   );
 };
