@@ -1,4 +1,8 @@
-import { SearchMoviesInput, selectSearch } from "@/features/SearchMoviesInput";
+import {
+  SearchMoviesInput,
+  selectSearch,
+  selectType,
+} from "@/features/SearchMoviesInput";
 import { Pagination, selectPage } from "@/features/Pagination";
 import { MoviesList, useGetMoviesQuery } from "@/features/MoviesList";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
@@ -6,9 +10,10 @@ import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 const SearchMoviesContent = () => {
   const search = useAppSelector(selectSearch);
   const page = useAppSelector(selectPage);
+  const type = useAppSelector(selectType);
 
   const { data, isFetching } = useGetMoviesQuery(
-    { search, page },
+    { search, page, type },
     {
       skip: !search,
     },

@@ -1,6 +1,6 @@
 import type { JSX } from "react";
 import { selectPage } from "../model/selectors";
-import { paginationActions } from "@/features/Pagination";
+import { paginationActions } from "../model/slice";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 

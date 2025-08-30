@@ -1,7 +1,10 @@
 import { type JSX, useState } from "react";
 import { useDispatch } from "react-redux";
+import type { contentType } from "@/shared/types/contentType";
 import { paginationActions } from "@/features/Pagination";
-import { searchMoviesInputActions } from "@/features/SearchMoviesInput";
+import { searchMoviesInputActions } from "../model/slice";
+import { selectSearch, selectType } from "../model/selectors";
+import { useAppSelector } from "@/shared/lib/hooks/useAppSelector.ts";
 
 /**
  * React-компонент, отображающий input и кнопку для поиска фильмов.
@@ -11,7 +14,9 @@ import { searchMoviesInputActions } from "@/features/SearchMoviesInput";
  */
 const SearchMoviesInput = (): JSX.Element => {
   const dispatch = useDispatch();
-  const [query, setQuery] = useState("");
+  const search = useAppSelector(selectSearch);
+  const type = useAppSelector(selectType);
+  const [query, setQuery] = useState(search ?? "");
 
   const handleSearch = () => {
     const trimmed = query.trim();
@@ -37,6 +42,26 @@ const SearchMoviesInput = (): JSX.Element => {
         >
           Найти
         </button>
+      </div>
+      <div className="flex gap-2 max-w-3xl mx-auto px-4 mb-4">
+        <select
+          value={type ?? ""}
+          onChange={(e) =>
+            dispatch(
+              searchMoviesInputActions.setType(
+                e.target.value === ""
+                  ? undefined
+                  : (e.target.value as contentType),
+              ),
+            )
+          }
+          className="border p-2 rounded"
+        >
+          <option value="">Все</option>
+          <option value="movie">Фильмы</option>
+          <option value="series">Сериалы</option>
+          <option value="episode">Эпизоды</option>
+        </select>
       </div>
     </>
   );
