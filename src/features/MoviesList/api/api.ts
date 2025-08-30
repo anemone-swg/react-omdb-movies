@@ -6,11 +6,21 @@ const moviesListApi = baseApi.injectEndpoints({
   endpoints: (create) => ({
     getMovies: create.query<
       SearchMoviesResponse,
-      { search: string; page?: number; type?: contentType }
+      {
+        search: string;
+        page?: number;
+        type?: contentType;
+        year?: number | undefined;
+      }
     >({
-      query: ({ search, page = 1, type }) => ({
+      query: ({ search, page = 1, type, year }) => ({
         url: "",
-        params: { s: search, page, ...(type ? { type } : {}) },
+        params: {
+          s: search,
+          page,
+          ...(type ? { type } : {}),
+          ...(year ? { y: year } : {}),
+        },
       }),
     }),
   }),

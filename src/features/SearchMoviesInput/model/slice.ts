@@ -4,11 +4,13 @@ import type { contentType } from "@/shared/types/contentType";
 export interface SearchMoviesInputState {
   search: string;
   type: contentType;
+  year: number | undefined;
 }
 
 const initialState: SearchMoviesInputState = {
   search: "",
   type: undefined,
+  year: undefined,
 };
 
 export const searchMoviesInputSlice = createSlice({
@@ -20,6 +22,9 @@ export const searchMoviesInputSlice = createSlice({
     },
     setType(state, action: PayloadAction<contentType>) {
       state.type = action.payload;
+    },
+    setYear(state, action: PayloadAction<number | undefined>) {
+      state.year = action.payload;
     },
   },
 });

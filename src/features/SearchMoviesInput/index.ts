@@ -3,4 +3,4 @@ export {
   searchMoviesInputReducer,
   searchMoviesInputActions,
 } from "./model/slice";
-export { selectSearch, selectType } from "./model/selectors";
+export { selectSearch, selectType, selectYear } from "./model/selectors";

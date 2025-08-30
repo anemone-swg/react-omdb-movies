@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import type { contentType } from "@/shared/types/contentType";
 import { paginationActions } from "@/features/Pagination";
 import { searchMoviesInputActions } from "../model/slice";
-import { selectSearch, selectType } from "../model/selectors";
+import { selectSearch, selectType, selectYear } from "../model/selectors";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector.ts";
 
 /**
@@ -16,7 +16,10 @@ const SearchMoviesInput = (): JSX.Element => {
   const dispatch = useDispatch();
   const search = useAppSelector(selectSearch);
   const type = useAppSelector(selectType);
+  const year = useAppSelector(selectYear);
   const [query, setQuery] = useState(search ?? "");
+
+  const years = Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i);
 
   const handleSearch = () => {
     const trimmed = query.trim();
@@ -61,6 +64,24 @@ const SearchMoviesInput = (): JSX.Element => {
           <option value="movie">Фильмы</option>
           <option value="series">Сериалы</option>
           <option value="episode">Эпизоды</option>
+        </select>
+        <select
+          value={year ?? ""}
+          onChange={(e) =>
+            dispatch(
+              searchMoviesInputActions.setYear(
+                e.target.value === "" ? undefined : Number(e.target.value),
+              ),
+            )
+          }
+          className="border p-2 rounded"
+        >
+          <option value="">Все годы</option>
+          {years.map((y) => (
+            <option key={y} value={y}>
+              {y}
+            </option>
+          ))}
         </select>
       </div>
     </>
