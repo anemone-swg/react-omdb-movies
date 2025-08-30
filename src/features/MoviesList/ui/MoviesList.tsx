@@ -28,6 +28,11 @@ const MoviesList = ({
   isFetching,
   error,
 }: MoviesListProps): JSX.Element => {
+  const uniqueMovies = data?.filter(
+    (movie, index, self) =>
+      index === self.findIndex((m) => m.imdbID === movie.imdbID),
+  );
+
   return (
     <>
       {isFetching && <Loader />}
@@ -35,7 +40,7 @@ const MoviesList = ({
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {!isFetching &&
-          data?.map((movie) => (
+          uniqueMovies?.map((movie) => (
             <div
               key={movie.imdbID}
               className="p-2 border rounded-lg overflow-hidden shadow flex flex-col justify-center items-center"
