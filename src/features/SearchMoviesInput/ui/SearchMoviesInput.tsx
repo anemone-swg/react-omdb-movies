@@ -1,26 +1,15 @@
-import { type Dispatch, type JSX, type SetStateAction, useState } from "react";
+import { type JSX, useState } from "react";
 import { useDispatch } from "react-redux";
 import { paginationActions } from "@/features/Pagination";
-
-/**
- * Props компонента SearchMoviesInput.
- *
- * @property {Dispatch<SetStateAction<string>>} setSearch - Функция для изменения строки поиска.
- */
-export interface SearchMoviesInputProps {
-  setSearch: Dispatch<SetStateAction<string>>;
-}
+import { searchMoviesInputActions } from "@/features/SearchMoviesInput";
 
 /**
  * React-компонент, отображающий input и кнопку для поиска фильмов.
  *
  * @component
- * @param {SearchMoviesInputProps} props - Props компонента.
  * @returns {JSX.Element} JSX-элемент с полем ввода и кнопкой поиска фильмов.
  */
-const SearchMoviesInput = ({
-  setSearch,
-}: SearchMoviesInputProps): JSX.Element => {
+const SearchMoviesInput = (): JSX.Element => {
   const dispatch = useDispatch();
   const [query, setQuery] = useState("");
 
@@ -28,7 +17,7 @@ const SearchMoviesInput = ({
     const trimmed = query.trim();
     if (!trimmed) return;
     dispatch(paginationActions.setPage(1));
-    setSearch(trimmed);
+    dispatch(searchMoviesInputActions.setSearch(trimmed));
   };
 
   return (

@@ -1,11 +1,10 @@
-import { useState } from "react";
-import { SearchMoviesInput } from "@/features/SearchMoviesInput";
+import { SearchMoviesInput, selectSearch } from "@/features/SearchMoviesInput";
 import { Pagination, selectPage } from "@/features/Pagination";
 import { MoviesList, useGetMoviesQuery } from "@/features/MoviesList";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 
 const SearchMoviesContent = () => {
-  const [search, setSearch] = useState("");
+  const search = useAppSelector(selectSearch);
   const page = useAppSelector(selectPage);
 
   const { data, isFetching } = useGetMoviesQuery(
@@ -17,7 +16,7 @@ const SearchMoviesContent = () => {
 
   return (
     <>
-      <SearchMoviesInput setSearch={setSearch} />
+      <SearchMoviesInput />
       <MoviesList
         data={data?.Search}
         isFetching={isFetching}

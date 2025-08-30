@@ -12,9 +12,11 @@ import {
 import storage from "redux-persist/lib/storage";
 import { baseApi } from "@/shared/api/rtkApi";
 import { paginationReducer } from "@/features/Pagination";
+import { searchMoviesInputReducer } from "@/features/SearchMoviesInput";
 
 const rootReducer = combineReducers({
   pagination: paginationReducer,
+  searchMoviesInput: searchMoviesInputReducer,
   [baseApi.reducerPath]: baseApi.reducer,
 });
 
