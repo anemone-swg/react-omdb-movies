@@ -1,6 +1,8 @@
 import type { JSX } from "react";
+import { Link } from "react-router-dom";
 import type { Movie } from "../model/types/movie";
 import { Loader } from "@/shared/ui/Loader";
+import { Routes } from "@/shared/config/routes";
 
 /**
  * Props компонента MoviesList.
@@ -41,9 +43,11 @@ const MoviesList = ({
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {!isFetching &&
           uniqueMovies?.map((movie) => (
-            <div
+            <Link
               key={movie.imdbID}
-              className="p-2 border rounded-lg overflow-hidden shadow flex flex-col justify-center items-center"
+              to={Routes.getMovieSearchDetail(movie.imdbID)}
+              className="p-2 border rounded-lg overflow-hidden shadow flex flex-col justify-center items-center transform transition-transform duration-200 ease-in-out
+              hover:scale-101 hover:shadow-lg"
             >
               <img
                 src={movie.Poster !== "N/A" ? movie.Poster : "/no-image.jpg"}
@@ -56,7 +60,7 @@ const MoviesList = ({
                   {movie.Year} ({movie.Type})
                 </p>
               </div>
-            </div>
+            </Link>
           ))}
       </div>
     </>
