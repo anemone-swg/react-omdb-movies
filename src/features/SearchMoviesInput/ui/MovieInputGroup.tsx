@@ -2,11 +2,14 @@ import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { paginationActions } from "@/features/Pagination";
 import { searchMoviesInputActions } from "../model/slice";
+import { selectSearch } from "../model/selectors";
 import { MovieInput } from "@/shared/ui/MovieInput";
+import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 
 const MovieInputGroup = () => {
   const dispatch = useDispatch();
-  const [query, setQuery] = useState("");
+  const search = useAppSelector(selectSearch);
+  const [query, setQuery] = useState(search ?? "");
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);

@@ -1,4 +1,4 @@
-import { type JSX } from "react";
+import React, { type JSX } from "react";
 import { useDispatch } from "react-redux";
 import type { contentType } from "@/shared/types/contentType";
 import { searchMoviesInputActions } from "../model/slice";
@@ -68,4 +68,4 @@ const SearchMoviesInput = (): JSX.Element => {
   );
 };
 
-export default SearchMoviesInput;
+export default React.memo(SearchMoviesInput);
