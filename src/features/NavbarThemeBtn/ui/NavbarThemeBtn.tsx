@@ -15,7 +15,7 @@ const NavbarThemeBtn = (): JSX.Element => {
   return (
     <button
       onClick={toggleTheme}
-      className="bg-button text-white px-4 py-2 rounded"
+      className="bg-button hover:bg-button-hover transition-colors text-white px-4 py-2 rounded"
     >
       {theme === "light" ? <FaRegSun /> : <FaRegMoon />}
     </button>

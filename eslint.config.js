@@ -12,12 +12,17 @@ export default defineConfig([
     files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     plugins: { js, prettierPlugin },
     extends: ["js/recommended"],
-    languageOptions: { globals: globals.browser },
+    languageOptions: {
+      globals: globals.browser,
+    },
     rules: {
+      "no-unused-vars": "off",
       "react/react-in-jsx-scope": "off",
       "@typescript-eslint/no-unused-vars": [
         "warn",
-        { argsIgnorePattern: "^_" },
+        {
+          argsIgnorePattern: "^_",
+        },
       ],
     },
   },
