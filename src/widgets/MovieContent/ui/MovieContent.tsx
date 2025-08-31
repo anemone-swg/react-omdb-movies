@@ -32,6 +32,12 @@ const MovieContent = () => {
           src={data?.Poster !== "N/A" ? data?.Poster : "/no-image.jpg"}
           alt={data?.Title}
           className="w-full max-h-[500px] object-contain mb-6 mx-auto"
+          onError={(e) => {
+            const img = e.currentTarget;
+            if (img.src !== window.location.origin + "/no-image.jpg") {
+              img.src = "/no-image.jpg";
+            }
+          }}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm md:text-base">

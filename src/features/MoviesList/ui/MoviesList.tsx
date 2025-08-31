@@ -47,12 +47,18 @@ const MoviesList = ({
               key={movie.imdbID}
               to={Routes.getMovieSearchDetail(movie.imdbID)}
               className="p-2 border rounded-lg overflow-hidden shadow flex flex-col justify-center items-center transform transition-transform duration-200 ease-in-out
-              hover:scale-101 hover:shadow-lg"
+              hover:scale-[1.01] hover:shadow-lg"
             >
               <img
                 src={movie.Poster !== "N/A" ? movie.Poster : "/no-image.jpg"}
                 alt={movie.Title}
                 className="w-full max-h-64 object-contain"
+                onError={(e) => {
+                  const img = e.currentTarget;
+                  if (img.src !== window.location.origin + "/no-image.jpg") {
+                    img.src = "/no-image.jpg";
+                  }
+                }}
               />
               <div className="pt-2">
                 <h2 className="font-bold text-center">{movie.Title}</h2>

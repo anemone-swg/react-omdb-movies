@@ -1,10 +1,10 @@
 import React, { type JSX } from "react";
-import { useDispatch } from "react-redux";
-import type { contentType } from "@/shared/types/contentType";
-import { searchMoviesInputActions } from "../model/slice";
 import { selectType, selectYear } from "../model/selectors";
-import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
+import { setTypeWithResetPage, setYearWithResetPage } from "../model/thunks";
 import MovieInputGroup from "./MovieInputGroup";
+import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
+import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
+import type { contentType } from "@/shared/types/contentType";
 
 /**
  * React-компонент, отображающий input и кнопку для поиска фильмов.
@@ -13,7 +13,7 @@ import MovieInputGroup from "./MovieInputGroup";
  * @returns {JSX.Element} JSX-элемент с полем ввода и кнопкой поиска фильмов.
  */
 const SearchMoviesInput = (): JSX.Element => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const type = useAppSelector(selectType);
   const year = useAppSelector(selectYear);
 
@@ -31,7 +31,7 @@ const SearchMoviesInput = (): JSX.Element => {
           value={type ?? ""}
           onChange={(e) =>
             dispatch(
-              searchMoviesInputActions.setType(
+              setTypeWithResetPage(
                 e.target.value === ""
                   ? undefined
                   : (e.target.value as contentType),
@@ -49,7 +49,7 @@ const SearchMoviesInput = (): JSX.Element => {
           value={year ?? ""}
           onChange={(e) =>
             dispatch(
-              searchMoviesInputActions.setYear(
+              setYearWithResetPage(
                 e.target.value === "" ? undefined : Number(e.target.value),
               ),
             )
