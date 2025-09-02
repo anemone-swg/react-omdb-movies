@@ -44,7 +44,10 @@ const Pagination = ({
             {t("назад")}
           </button>
           <span className="px-4 py-2">
-            {t("стр")} {page} {t("из")} {Math.ceil(Number(totalResults) / 10)}
+            {t("страница_из", {
+              current: page,
+              total: Math.ceil(Number(totalResults) / 10),
+            })}
           </span>
           <button
             className="bg-button hover:bg-button-hover text-white px-4 py-2 rounded transition-colors disabled:opacity-50"
