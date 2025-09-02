@@ -1,4 +1,5 @@
 import React, { type JSX } from "react";
+import { useTranslation } from "react-i18next";
 import { selectType, selectYear } from "../model/selectors";
 import { setTypeWithResetPage, setYearWithResetPage } from "../model/thunks";
 import MovieInputGroup from "./MovieInputGroup";
@@ -13,6 +14,7 @@ import type { contentType } from "@/shared/types/contentType";
  * @returns {JSX.Element} JSX-элемент с полем ввода и кнопкой поиска фильмов.
  */
 const SearchMoviesInput = (): JSX.Element => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const type = useAppSelector(selectType);
   const year = useAppSelector(selectYear);
@@ -24,7 +26,9 @@ const SearchMoviesInput = (): JSX.Element => {
 
   return (
     <>
-      <h1 className="text-2xl font-bold mb-6 text-center">Поиск фильмов</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center">
+        {t("поиск_фильмов")}
+      </h1>
       <MovieInputGroup />
       <div className="flex gap-2 max-w-3xl mx-auto px-4 mb-4">
         <select
@@ -40,10 +44,10 @@ const SearchMoviesInput = (): JSX.Element => {
           }
           className="border p-2 rounded"
         >
-          <option value="">Все</option>
-          <option value="movie">Фильмы</option>
-          <option value="series">Сериалы</option>
-          <option value="episode">Эпизоды</option>
+          <option value="">{t("все_поиск")}</option>
+          <option value="movie">{t("фильмы_поиск")}</option>
+          <option value="series">{t("сериалы_поиск")}</option>
+          <option value="episode">{t("эпизоды_поиск")}</option>
         </select>
         <select
           value={year ?? ""}
@@ -56,7 +60,7 @@ const SearchMoviesInput = (): JSX.Element => {
           }
           className="border p-2 rounded"
         >
-          <option value="">Все годы</option>
+          <option value="">{t("все_годы_поиск")}</option>
           {years.map((y) => (
             <option key={y} value={y}>
               {y}
