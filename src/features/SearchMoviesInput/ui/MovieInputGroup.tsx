@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { paginationActions } from "@/features/Pagination";
 import { searchMoviesInputActions } from "../model/slice";
 import { selectSearch } from "../model/selectors";
@@ -7,6 +8,7 @@ import { MovieInput } from "@/shared/ui/MovieInput";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 
 const MovieInputGroup = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const search = useAppSelector(selectSearch);
   const [query, setQuery] = useState(search ?? "");
@@ -29,7 +31,7 @@ const MovieInputGroup = () => {
         className="bg-button hover:bg-button-hover text-white px-4 py-2 rounded transition-colors"
         onClick={handleSearch}
       >
-        Найти
+        {t("найти")}
       </button>
     </div>
   );

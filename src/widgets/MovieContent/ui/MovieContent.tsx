@@ -1,26 +1,18 @@
 import { useParams } from "react-router-dom";
-import { Loader } from "@/shared/ui/Loader";
+import { useTranslation } from "react-i18next";
 import { useGetMovieByIdQuery } from "@/entities/MovieProfile";
+import { Loader } from "@/shared/ui/Loader";
+import { ErrLoadingMessage } from "@/shared/ui/ErrLoadingMessage";
 
 const MovieContent = () => {
+  const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
 
-  if (!id)
-    return (
-      <p className="text-center text-red-500">
-        Ошибка при загрузке. Фильм не найден
-      </p>
-    );
+  if (!id) return <ErrLoadingMessage />;
 
   const { data, isFetching } = useGetMovieByIdQuery({ i: id });
 
-  if (data?.Response === "False") {
-    return (
-      <p className="text-center text-red-500">
-        Ошибка при загрузке. Фильм не найден
-      </p>
-    );
-  }
+  if (data?.Response === "False") return <ErrLoadingMessage />;
 
   if (isFetching) return <Loader />;
 
@@ -32,62 +24,68 @@ const MovieContent = () => {
           src={data?.Poster !== "N/A" ? data?.Poster : "/no-image.jpg"}
           alt={data?.Title}
           className="w-full max-h-[500px] object-contain mb-6 mx-auto"
+          onError={(e) => {
+            const img = e.currentTarget;
+            if (img.src !== window.location.origin + "/no-image.jpg") {
+              img.src = "/no-image.jpg";
+            }
+          }}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm md:text-base">
           <div>
             <p>
-              <strong>Год:</strong> {data?.Year}
+              <strong>{t("год")}</strong> {data?.Year}
             </p>
             <p>
-              <strong>Рейтинг:</strong> {data?.Rated}
+              <strong>{t("рейтинг")}</strong> {data?.Rated}
             </p>
             <p>
-              <strong>Дата релиза:</strong> {data?.Released}
+              <strong>{t("дата_релиза")}</strong> {data?.Released}
             </p>
             <p>
-              <strong>Время:</strong> {data?.Runtime}
+              <strong>{t("время")}</strong> {data?.Runtime}
             </p>
             <p>
-              <strong>Жанр:</strong> {data?.Genre}
+              <strong>{t("жанр")}</strong> {data?.Genre}
             </p>
             <p>
-              <strong>Режиссёр:</strong> {data?.Director}
+              <strong>{t("режиссер")}</strong> {data?.Director}
             </p>
             <p>
-              <strong>Сценарист:</strong> {data?.Writer}
+              <strong>{t("сценарист")}</strong> {data?.Writer}
             </p>
             <p>
-              <strong>Актёры:</strong> {data?.Actors}
+              <strong>{t("актеры")}</strong> {data?.Actors}
             </p>
           </div>
 
           <div>
             <p>
-              <strong>Описание:</strong> {data?.Plot}
+              <strong>{t("описание")}</strong> {data?.Plot}
             </p>
             <p>
-              <strong>Язык:</strong> {data?.Language}
+              <strong>{t("язык")}</strong> {data?.Language}
             </p>
             <p>
-              <strong>Страна:</strong> {data?.Country}
+              <strong>{t("страна")}</strong> {data?.Country}
             </p>
             <p>
-              <strong>Награды:</strong> {data?.Awards}
+              <strong>{t("награды")}</strong> {data?.Awards}
             </p>
             <p>
-              <strong>Box Office:</strong> {data?.BoxOffice}
+              <strong>{t("сборы")}</strong> {data?.BoxOffice}
             </p>
             <p>
-              <strong>Production:</strong> {data?.Production}
+              <strong>{t("производство")}</strong> {data?.Production}
             </p>
             <p>
-              <strong>Website:</strong>{" "}
+              <strong>{t("веб-сайт")}</strong>{" "}
               {data?.Website !== "N/A" ? data?.Website : "-"}
             </p>
 
             <div className="mt-2">
-              <strong>Рейтинги:</strong>
+              <strong>{t("рейтинги")}</strong>
               <ul className="list-disc list-inside">
                 {data?.Ratings.map((rating, idx) => (
                   <li key={idx}>

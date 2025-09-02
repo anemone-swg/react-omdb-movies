@@ -5,9 +5,12 @@ import {
 } from "@reduxjs/toolkit/query";
 
 const rawBaseQuery = fetchBaseQuery({
-  baseUrl: "http://www.omdbapi.com/",
+  baseUrl: "https://www.omdbapi.com/",
   paramsSerializer: (params) => {
-    return new URLSearchParams({ apikey: "903b94fa", ...params }).toString();
+    return new URLSearchParams({
+      apikey: import.meta.env.VITE_OMDB_API_KEY,
+      ...params,
+    }).toString();
   },
 });
 

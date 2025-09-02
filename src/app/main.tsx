@@ -6,6 +6,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { AppRouter } from "@/app/providers/AppRouter";
 import { ThemeProvider } from "@/app/providers/ThemeProvider";
 import { persistor, store } from "@/app/store/store";
+import "@/shared/config/i18n/i18n";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

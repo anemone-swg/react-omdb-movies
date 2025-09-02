@@ -3,6 +3,7 @@ import { selectPage } from "../model/selectors";
 import { paginationActions } from "../model/slice";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
+import { useTranslation } from "react-i18next";
 
 /**
  * Props компонента Pagination.
@@ -27,6 +28,7 @@ const Pagination = ({
   totalResults,
   isFetching = false,
 }: PaginationProps): JSX.Element => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const page = useAppSelector(selectPage);
 
@@ -39,10 +41,10 @@ const Pagination = ({
             disabled={page === 1 || isFetching}
             onClick={() => dispatch(paginationActions.setPage(page - 1))}
           >
-            Назад
+            {t("назад")}
           </button>
           <span className="px-4 py-2">
-            Стр. {page} из {Math.ceil(Number(totalResults) / 10)}
+            {t("стр")} {page} {t("из")} {Math.ceil(Number(totalResults) / 10)}
           </span>
           <button
             className="bg-button hover:bg-button-hover text-white px-4 py-2 rounded transition-colors disabled:opacity-50"
@@ -51,7 +53,7 @@ const Pagination = ({
             }
             onClick={() => dispatch(paginationActions.setPage(page + 1))}
           >
-            Вперёд
+            {t("вперед")}
           </button>
         </div>
       )}

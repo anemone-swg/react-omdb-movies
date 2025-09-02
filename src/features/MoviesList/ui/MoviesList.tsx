@@ -2,7 +2,8 @@ import type { JSX } from "react";
 import { Link } from "react-router-dom";
 import type { Movie } from "../model/types/movie";
 import { Loader } from "@/shared/ui/Loader";
-import { Routes } from "@/shared/config/routes";
+import { Routes } from "@/shared/config/route/routes.ts";
+import { ErrLoadingMessage } from "@/shared/ui/ErrLoadingMessage";
 
 /**
  * Props компонента MoviesList.
@@ -38,7 +39,7 @@ const MoviesList = ({
   return (
     <>
       {isFetching && <Loader />}
-      {error && <p className="text-center text-red-500">Ошибка при загрузке</p>}
+      {error && <ErrLoadingMessage />}
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {!isFetching &&
@@ -47,12 +48,18 @@ const MoviesList = ({
               key={movie.imdbID}
               to={Routes.getMovieSearchDetail(movie.imdbID)}
               className="p-2 border rounded-lg overflow-hidden shadow flex flex-col justify-center items-center transform transition-transform duration-200 ease-in-out
-              hover:scale-101 hover:shadow-lg"
+              hover:scale-[1.01] hover:shadow-lg"
             >
               <img
                 src={movie.Poster !== "N/A" ? movie.Poster : "/no-image.jpg"}
                 alt={movie.Title}
                 className="w-full max-h-64 object-contain"
+                onError={(e) => {
+                  const img = e.currentTarget;
+                  if (img.src !== window.location.origin + "/no-image.jpg") {
+                    img.src = "/no-image.jpg";
+                  }
+                }}
               />
               <div className="pt-2">
                 <h2 className="font-bold text-center">{movie.Title}</h2>

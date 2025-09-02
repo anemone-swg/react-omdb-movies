@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "@/app/App";
-import { Routes } from "@/shared/config/routes.ts";
+import { Routes } from "@/shared/config/route/routes.ts";
 import { HomePage } from "@/pages/HomePage";
 import { MoviesPage } from "@/pages/MoviesPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
