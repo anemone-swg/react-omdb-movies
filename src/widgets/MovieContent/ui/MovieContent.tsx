@@ -1,26 +1,16 @@
 import { useParams } from "react-router-dom";
 import { Loader } from "@/shared/ui/Loader";
 import { useGetMovieByIdQuery } from "@/entities/MovieProfile";
+import { ErrLoadingMessage } from "@/shared/ui/ErrLoadingMessage";
 
 const MovieContent = () => {
   const { id } = useParams<{ id: string }>();
 
-  if (!id)
-    return (
-      <p className="text-center text-red-500">
-        Ошибка при загрузке. Фильм не найден
-      </p>
-    );
+  if (!id) return <ErrLoadingMessage />;
 
   const { data, isFetching } = useGetMovieByIdQuery({ i: id });
 
-  if (data?.Response === "False") {
-    return (
-      <p className="text-center text-red-500">
-        Ошибка при загрузке. Фильм не найден
-      </p>
-    );
-  }
+  if (data?.Response === "False") return <ErrLoadingMessage />;
 
   if (isFetching) return <Loader />;
 
