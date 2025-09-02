@@ -3,7 +3,8 @@ import { initReactI18next } from "react-i18next";
 import ru from "./locales/ru/translation.json";
 import en from "./locales/en/translation.json";
 
-const savedLang = localStorage.getItem("lang") || "ru";
+const savedLang =
+  typeof window !== "undefined" ? localStorage.getItem("lang") || "ru" : "ru";
 
 (async () => {
   await i18n.use(initReactI18next).init({
