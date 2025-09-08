@@ -7,6 +7,8 @@ import { NotFoundPage } from "@/pages/NotFoundPage";
 import { MoviesSearchPage } from "@/pages/MoviesSearchPage";
 import { MovieDetailsPage } from "@/pages/MovieDetailsPage";
 import { MoviesLogic } from "@/widgets/MoviesLogic";
+import { Loader } from "@/shared/ui/Loader";
+import { Suspense } from "react";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -34,7 +36,11 @@ export const AppRouter = createBrowserRouter([
           },
           {
             path: Routes.MOVIES_SEARCH_DETAIL,
-            element: <MovieDetailsPage />,
+            element: (
+              <Suspense fallback={<Loader />}>
+                <MovieDetailsPage />
+              </Suspense>
+            ),
           },
         ],
       },
