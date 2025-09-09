@@ -7,6 +7,8 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import ReactRefreshPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 import ReactRefreshTypeScript from "react-refresh-typescript";
 import CopyPlugin from "copy-webpack-plugin";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
+import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,7 +22,8 @@ export default (env = {}) => {
     entry: "./src/app/main.tsx",
     output: {
       path: path.resolve(__dirname, "dist"),
-      filename: "bundle.[contenthash].js",
+      filename: "bundle.[contenthash:8].js",
+      chunkFilename: "bundle.[contenthash:8].chunk.js",
       clean: true,
       publicPath: "/",
     },
@@ -94,12 +97,15 @@ export default (env = {}) => {
         template: path.resolve(__dirname, "index.html"),
         favicon: path.resolve(__dirname, "public", "favicon.ico"),
       }),
+      isDev && new ForkTsCheckerWebpackPlugin(),
+      new webpack.ProgressPlugin(),
       isProd
         ? new MiniCssExtractPlugin({
             filename: "css/[name].[contenthash:8].css",
             chunkFilename: "css/[name].[contenthash:8].css",
           })
         : undefined,
+      isProd && new BundleAnalyzerPlugin({}),
       isProd
         ? new CopyPlugin({
             patterns: [
@@ -110,11 +116,12 @@ export default (env = {}) => {
             ],
           })
         : undefined,
-      isDev ? new ReactRefreshPlugin({}) : undefined,
+      isDev && new ReactRefreshPlugin({}),
       new webpack.DefinePlugin({
         "process.env": JSON.stringify(process.env),
       }),
     ].filter(Boolean),
+    devtool: isDev && "inline-source-map",
     devServer: {
       static: {
         directory: path.join(__dirname, "public"),
