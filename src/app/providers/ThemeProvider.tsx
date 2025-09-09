@@ -1,6 +1,6 @@
 import { type JSX, type ReactNode, useEffect, useState } from "react";
-import { ThemeContext } from "@/shared/context/themeContext.js";
-import type { Theme } from "@/shared/types/theme.ts";
+import { ThemeContext } from "@/shared/context/themeContext";
+import type { Theme } from "@/shared/types/theme";
 
 /**
  * Пропсы компонента ThemeProvider.

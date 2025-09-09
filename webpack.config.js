@@ -1,0 +1,129 @@
+import webpack from "webpack";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import ReactRefreshPlugin from "@pmmmwh/react-refresh-webpack-plugin";
+import ReactRefreshTypeScript from "react-refresh-typescript";
+import CopyPlugin from "copy-webpack-plugin";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.resolve(__dirname, "./.env") });
+
+export default (env = {}) => {
+  const isDev = env.mode === "development";
+  const isProd = env.mode === "production";
+
+  return {
+    entry: "./src/app/main.tsx",
+    output: {
+      path: path.resolve(__dirname, "dist"),
+      filename: "bundle.[contenthash].js",
+      clean: true,
+      publicPath: "/",
+    },
+    resolve: {
+      extensions: [".tsx", ".ts", ".js"],
+      alias: {
+        "@": path.resolve(__dirname, "src"),
+      },
+    },
+    module: {
+      rules: [
+        {
+          test: /\.(ts|tsx)$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: "ts-loader",
+              options: {
+                transpileOnly: true,
+                getCustomTransformers: () => ({
+                  before: [isDev && ReactRefreshTypeScript()].filter(Boolean),
+                }),
+              },
+            },
+          ],
+        },
+        // {
+        //   test: /\.(js|jsx)$/,
+        //   exclude: /node_modules/,
+        //   use: {
+        //     loader: "babel-loader",
+        //     options: {
+        //       presets: [
+        //         "@babel/preset-env",
+        //         "@babel/preset-react",
+        //         "@babel/preset-typescript",
+        //       ],
+        //     },
+        //   },
+        // },
+        {
+          test: /\.s[ac]ss$/i,
+          use: [
+            isDev ? "style-loader" : MiniCssExtractPlugin.loader,
+            {
+              loader: "css-loader",
+              options: {
+                esModule: false,
+                modules: {
+                  namedExport: false,
+                  auto: (resourcePath) => resourcePath.includes(".module."),
+                  localIdentName: isDev
+                    ? "[path][name]__[local]--[hash:base64:5]"
+                    : "[hash:base64:8]",
+                  exportLocalsConvention: "asIs",
+                },
+              },
+            },
+            "postcss-loader",
+            "sass-loader",
+          ],
+        },
+        {
+          test: /\.(png|jpe?g|gif|svg)$/i,
+          type: "asset/resource",
+        },
+      ],
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: path.resolve(__dirname, "index.html"),
+        favicon: path.resolve(__dirname, "public", "favicon.ico"),
+      }),
+      isProd
+        ? new MiniCssExtractPlugin({
+            filename: "css/[name].[contenthash:8].css",
+            chunkFilename: "css/[name].[contenthash:8].css",
+          })
+        : undefined,
+      isProd
+        ? new CopyPlugin({
+            patterns: [
+              {
+                from: path.resolve(__dirname, "public"),
+                to: path.resolve(__dirname, "dist"),
+              },
+            ],
+          })
+        : undefined,
+      isDev ? new ReactRefreshPlugin({}) : undefined,
+      new webpack.DefinePlugin({
+        "process.env": JSON.stringify(process.env),
+      }),
+    ].filter(Boolean),
+    devServer: {
+      static: {
+        directory: path.join(__dirname, "public"),
+      },
+      port: 3000,
+      hot: true,
+      open: true,
+      historyApiFallback: true,
+    },
+    mode: env.mode,
+  };
+};

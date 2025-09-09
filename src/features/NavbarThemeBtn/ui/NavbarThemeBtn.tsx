@@ -1,5 +1,5 @@
 import { FaRegMoon, FaRegSun } from "react-icons/fa";
-import { useTheme } from "@/shared/lib/hooks/useTheme.ts";
+import { useTheme } from "@/shared/lib/hooks/useTheme";
 import type { JSX } from "react";
 
 /**

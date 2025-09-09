@@ -1,4 +1,4 @@
-import { baseApi } from "@/shared/api/rtkApi.ts";
+import { baseApi } from "@/shared/api/rtkApi";
 import type { MovieByIdResponse } from "../model/types/movieByIdResponse";
 
 const moviesProfileApi = baseApi.injectEndpoints({

@@ -1,4 +1,4 @@
-import { baseApi } from "@/shared/api/rtkApi.ts";
+import { baseApi } from "@/shared/api/rtkApi";
 import type { SearchMoviesResponse } from "../model/types/searchMoviesResponse.ts";
 import type { contentType } from "@/shared/types/contentType";
 

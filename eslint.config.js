@@ -13,7 +13,11 @@ export default defineConfig([
     plugins: { js, prettierPlugin },
     extends: ["js/recommended"],
     languageOptions: {
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        process: "readonly",
+      },
     },
     rules: {
       "no-unused-vars": "off",
