@@ -1,7 +1,7 @@
-import webpack from "webpack";
+import webpack, { Configuration as WebpackConfiguration } from "webpack";
+import { Configuration as DevServerConfiguration } from "webpack-dev-server";
 import dotenv from "dotenv";
 import path from "path";
-import { fileURLToPath } from "url";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import ReactRefreshPlugin from "@pmmmwh/react-refresh-webpack-plugin";
@@ -9,15 +9,21 @@ import CopyPlugin from "copy-webpack-plugin";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+interface Env {
+  mode?: "development" | "production";
+}
+
+interface Configuration extends WebpackConfiguration {
+  devServer?: DevServerConfiguration;
+}
+
 dotenv.config({ path: path.resolve(__dirname, "./.env") });
 
-export default (env = {}) => {
+export default (env: Env = {}) => {
   const isDev = env.mode === "development";
   const isProd = env.mode === "production";
 
-  return {
+  const config: Configuration = {
     entry: "./src/app/main.tsx",
     output: {
       path: path.resolve(__dirname, "dist"),
@@ -80,7 +86,8 @@ export default (env = {}) => {
                 esModule: false,
                 modules: {
                   namedExport: false,
-                  auto: (resourcePath) => resourcePath.includes(".module."),
+                  auto: (resourcePath: string) =>
+                    resourcePath.includes(".module."),
                   localIdentName: isDev
                     ? "[path][name]__[local]--[hash:base64:5]"
                     : "[hash:base64:8]",
@@ -139,4 +146,6 @@ export default (env = {}) => {
     },
     mode: env.mode,
   };
+
+  return config;
 };

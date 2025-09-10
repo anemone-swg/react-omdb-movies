@@ -22,7 +22,12 @@
       ]
     }
   },
-  "include": [
-    "src"
-  ]
+  // данный код необходим, чтобы перенести webpack config на ts
+  // также пришлось из package.json убрать следующее: "type": "module"
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  },
+  "include": ["src", "*.ts"]
 }
