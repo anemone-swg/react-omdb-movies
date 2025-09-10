@@ -5,7 +5,6 @@ import { fileURLToPath } from "url";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import ReactRefreshPlugin from "@pmmmwh/react-refresh-webpack-plugin";
-import ReactRefreshTypeScript from "react-refresh-typescript";
 import CopyPlugin from "copy-webpack-plugin";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
@@ -35,35 +34,42 @@ export default (env = {}) => {
     },
     module: {
       rules: [
-        {
-          test: /\.(ts|tsx)$/,
-          exclude: /node_modules/,
-          use: [
-            {
-              loader: "ts-loader",
-              options: {
-                transpileOnly: true,
-                getCustomTransformers: () => ({
-                  before: [isDev && ReactRefreshTypeScript()].filter(Boolean),
-                }),
-              },
-            },
-          ],
-        },
         // {
-        //   test: /\.(js|jsx)$/,
+        //   test: /\.(ts|tsx)$/,
         //   exclude: /node_modules/,
-        //   use: {
-        //     loader: "babel-loader",
-        //     options: {
-        //       presets: [
-        //         "@babel/preset-env",
-        //         "@babel/preset-react",
-        //         "@babel/preset-typescript",
-        //       ],
+        //   use: [
+        //     {
+        //       loader: "ts-loader",
+        //       options: {
+        //         transpileOnly: true,
+        //         getCustomTransformers: () => ({
+        //           before: [isDev && ReactRefreshTypeScript()].filter(Boolean),
+        //         }),
+        //       },
         //     },
-        //   },
+        //   ],
         // },
+        // ts-loader закомментирован, т.к. добавлен babel ниже
+        {
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          use: {
+            loader: "babel-loader",
+            options: {
+              // можно вынести в отдельный babel.config
+              presets: [
+                "@babel/preset-env",
+                "@babel/preset-typescript",
+                [
+                  "@babel/preset-react",
+                  {
+                    runtime: isDev ? "automatic" : "classic",
+                  },
+                ],
+              ],
+            },
+          },
+        },
         {
           test: /\.s[ac]ss$/i,
           use: [
