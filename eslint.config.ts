@@ -1,3 +1,4 @@
+import path from "path";
 import js from "@eslint/js";
 import globals from "globals";
 import tseslint from "typescript-eslint";
@@ -13,6 +14,10 @@ export default defineConfig([
     plugins: { js, prettierPlugin },
     extends: ["js/recommended"],
     languageOptions: {
+      parserOptions: {
+        tsconfigRootDir: path.resolve(__dirname),
+        project: "./tsconfig.json",
+      },
       globals: {
         ...globals.browser,
         ...globals.node,

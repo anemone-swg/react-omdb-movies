@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "ESNext",
     "lib": [
       "DOM",
       "DOM.Iterable",
       "ESNext"
     ],
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "strict": true,
     "esModuleInterop": true,
@@ -15,10 +15,10 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
       "@/*": [
-        "*"
+        "src/*"
       ]
     }
   },
@@ -29,5 +29,8 @@
       "module": "CommonJS"
     }
   },
-  "include": ["src", "*.ts"]
+  "include": [
+    "src",
+    "*.ts"
+  ]
 }
