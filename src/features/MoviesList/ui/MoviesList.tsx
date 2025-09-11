@@ -51,6 +51,7 @@ const MoviesList = ({
               hover:scale-[1.01] hover:shadow-lg"
             >
               <img
+                loading="lazy"
                 src={movie.Poster !== "N/A" ? movie.Poster : "/no-image.jpg"}
                 alt={movie.Title}
                 className="w-full max-h-64 object-contain"
