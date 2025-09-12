@@ -2,8 +2,8 @@ import { useTranslation } from "react-i18next";
 import { GiFilmStrip } from "react-icons/gi";
 import { IoHomeOutline } from "react-icons/io5";
 import { NavbarThemeBtn } from "@/features/NavbarThemeBtn";
-import { NavbarBtn } from "@/features/NavbarBtn";
 import { LangSwitcher } from "@/features/LangSwitcher";
+import { NavbarBtn } from "@/shared/ui/NavbarBtn";
 import { Routes } from "@/shared/config/route/routes";
 
 const Navbar = () => {
