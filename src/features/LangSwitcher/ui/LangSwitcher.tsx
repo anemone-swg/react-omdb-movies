@@ -29,7 +29,6 @@ const LangSwitcher = ({
   const toggleLanguage = async () => {
     const newLang = i18n.language === "ru" ? "en" : "ru";
     await i18n.changeLanguage(newLang);
-    localStorage.setItem("lang", newLang);
   };
 
   return (
