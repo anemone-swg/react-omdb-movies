@@ -80,7 +80,7 @@ const MovieContent = () => {
               <strong>{t("производство")}</strong> {data?.Production}
             </p>
             <p>
-              <strong>{t("веб-сайт")}</strong>{" "}
+              <strong>{t("веб_сайт")}</strong>{" "}
               {data?.Website !== "N/A" ? data?.Website : "-"}
             </p>
 

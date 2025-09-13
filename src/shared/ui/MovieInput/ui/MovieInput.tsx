@@ -41,7 +41,7 @@ const MovieInput = ({
     <input
       className={clsx("border rounded p-2 flex-1", className)}
       type="text"
-      placeholder={placeholder ?? t("инпут-фильмов-поиск")}
+      placeholder={placeholder ?? t("инпут_фильмов_поиск")}
       value={value}
       onChange={onChange}
       {...otherProps}
