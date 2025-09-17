@@ -61,19 +61,19 @@ export default (env: Env = {}) => {
           exclude: /node_modules/,
           use: {
             loader: "babel-loader",
-            options: {
-              // можно вынести в отдельный babel.config
-              presets: [
-                "@babel/preset-env",
-                "@babel/preset-typescript",
-                [
-                  "@babel/preset-react",
-                  {
-                    runtime: isDev ? "automatic" : "classic",
-                  },
-                ],
-              ],
-            },
+            // вынесено в babel.config.json для работы jest + babel
+            // options: {
+            // presets: [
+            //   '@babel/preset-env', {targets: {node: 'current'}},
+            //   "@babel/preset-typescript",
+            //   [
+            //     "@babel/preset-react",
+            //     {
+            //       runtime: isDev ? "automatic" : "classic",
+            //     },
+            //   ],
+            // ],
+            //},
           },
         },
         {

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`getUniqueMovies уберет дубликаты 1`] = `
+[
+  {
+    "Poster": "N/A",
+    "Title": "Movie 1",
+    "Type": "movie",
+    "Year": "2020",
+    "imdbID": "1",
+  },
+  {
+    "Poster": "N/A",
+    "Title": "Movie 2",
+    "Type": "series",
+    "Year": "2021",
+    "imdbID": "2",
+  },
+]
+`;

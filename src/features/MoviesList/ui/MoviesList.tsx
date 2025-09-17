@@ -1,6 +1,7 @@
 import type { JSX } from "react";
 import { Link } from "react-router-dom";
 import type { Movie } from "../model/types/movie";
+import { getUniqueMovies } from "../lib/helpers/getUniqueMovies";
 import { Loader } from "@/shared/ui/Loader";
 import { Routes } from "@/shared/config/route/routes";
 import { ErrLoadingMessage } from "@/shared/ui/ErrLoadingMessage";
@@ -31,10 +32,7 @@ const MoviesList = ({
   isFetching,
   error,
 }: MoviesListProps): JSX.Element => {
-  const uniqueMovies = data?.filter(
-    (movie, index, self) =>
-      index === self.findIndex((m) => m.imdbID === movie.imdbID),
-  );
+  const uniqueMovies = data ? getUniqueMovies(data) : [];
 
   return (
     <>
