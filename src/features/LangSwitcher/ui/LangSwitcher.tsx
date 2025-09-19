@@ -33,6 +33,7 @@ const LangSwitcher = ({
 
   return (
     <button
+      data-testid={"lang-switcher-btn"}
       className={clsx(
         "bg-button hover:bg-button-hover transition-colors text-white px-4 py-2 rounded",
         className,

@@ -22,6 +22,9 @@ const config: Config = {
     "**/__tests__/**/*.?([mc])[jt]s?(x)",
     "**/?(*.)+(spec|test).?([mc])[jt]s?(x)",
   ],
+  moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/src/$1",
+  },
 
   // All imported modules in your tests should be mocked automatically
   // automock: false,
