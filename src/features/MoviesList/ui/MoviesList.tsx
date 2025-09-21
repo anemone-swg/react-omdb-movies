@@ -61,7 +61,9 @@ const MoviesList = ({
                 }}
               />
               <div className="pt-2">
-                <h2 className="font-bold text-center">{movie.Title}</h2>
+                <h2 data-testid="movies-item" className="font-bold text-center">
+                  {movie.Title}
+                </h2>
                 <p className="text-sm text-gray-500 text-center">
                   {movie.Year} ({movie.Type})
                 </p>
