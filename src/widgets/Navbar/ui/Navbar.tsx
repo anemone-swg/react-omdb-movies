@@ -15,8 +15,13 @@ const Navbar = () => {
         <div className="text-2xl font-bold select-none">OmdbMovies</div>
 
         <div className="flex space-x-4">
-          <NavbarBtn to={Routes.HOME} icon={IoHomeOutline} />
           <NavbarBtn
+            data-testid={"home-navbar-btn"}
+            to={Routes.HOME}
+            icon={IoHomeOutline}
+          />
+          <NavbarBtn
+            data-testid={"movies-navbar-btn"}
             to={Routes.MOVIES}
             label={t("фильмы")}
             icon={GiFilmStrip}
