@@ -1,4 +1,6 @@
 import "@testing-library/jest-dom";
+//без библы "whatwg-fetch" не работал переход на другие страницы
+import "whatwg-fetch";
 import { TextDecoder, TextEncoder } from "util";
 
 Object.assign(global, { TextDecoder, TextEncoder });
