@@ -1,8 +1,9 @@
 import type { JSX } from "react";
 import { Link } from "react-router-dom";
 import type { Movie } from "../model/types/movie";
+import { getUniqueMovies } from "../lib/helpers/getUniqueMovies";
 import { Loader } from "@/shared/ui/Loader";
-import { Routes } from "@/shared/config/route/routes.ts";
+import { Routes } from "@/shared/config/route/routes";
 import { ErrLoadingMessage } from "@/shared/ui/ErrLoadingMessage";
 
 /**
@@ -31,10 +32,7 @@ const MoviesList = ({
   isFetching,
   error,
 }: MoviesListProps): JSX.Element => {
-  const uniqueMovies = data?.filter(
-    (movie, index, self) =>
-      index === self.findIndex((m) => m.imdbID === movie.imdbID),
-  );
+  const uniqueMovies = data ? getUniqueMovies(data) : [];
 
   return (
     <>
@@ -51,6 +49,7 @@ const MoviesList = ({
               hover:scale-[1.01] hover:shadow-lg"
             >
               <img
+                loading="lazy"
                 src={movie.Poster !== "N/A" ? movie.Poster : "/no-image.jpg"}
                 alt={movie.Title}
                 className="w-full max-h-64 object-contain"
@@ -62,7 +61,9 @@ const MoviesList = ({
                 }}
               />
               <div className="pt-2">
-                <h2 className="font-bold text-center">{movie.Title}</h2>
+                <h2 data-testid="movies-item" className="font-bold text-center">
+                  {movie.Title}
+                </h2>
                 <p className="text-sm text-gray-500 text-center">
                   {movie.Year} ({movie.Type})
                 </p>

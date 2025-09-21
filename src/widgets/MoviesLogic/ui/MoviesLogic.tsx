@@ -7,7 +7,9 @@ const MoviesLogic = () => {
 
   return (
     <>
-      <LinkBtn to={Routes.MOVIES_SEARCH}>{t("поиск_фильмов")}</LinkBtn>
+      <LinkBtn data-testid={"link-to-search-movies"} to={Routes.MOVIES_SEARCH}>
+        {t("поиск_фильмов")}
+      </LinkBtn>
     </>
   );
 };

@@ -1,5 +1,6 @@
 import type { JSX, ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link, LinkProps } from "react-router-dom";
+import clsx from "clsx";
 import styles from "./LinkBtn.module.scss";
 
 /**
@@ -7,10 +8,12 @@ import styles from "./LinkBtn.module.scss";
  *
  * @property {string} to - Маршрут навигации.
  * @property {ReactNode} children - Дочерние элементы.
+ * @property {string} [className] - Кастомный стиль.
  */
-export interface LinkBtnProps {
+export interface LinkBtnProps extends LinkProps {
   to: string;
   children: ReactNode;
+  className?: string;
 }
 
 /**
@@ -21,9 +24,9 @@ export interface LinkBtnProps {
  * @returns {JSX.Element} JSX-элемент кнопки навигационной панели.
  */
 
-const LinkBtn = ({ to, children }: LinkBtnProps): JSX.Element => {
+const LinkBtn = ({ to, children, className, ...otherProps }: LinkBtnProps): JSX.Element => {
   return (
-    <Link to={to} className={styles.linkBtn}>
+    <Link to={to} className={clsx(styles.linkBtn, className)} {...otherProps}>
       <span className={styles.linkBtn__circle} aria-hidden="true">
         <span
           className={`${styles.linkBtn__arrow} ${styles.linkBtn__icon}`}

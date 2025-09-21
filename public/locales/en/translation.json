@@ -11,8 +11,7 @@
   "все_годы_поиск": "All years",
   "назад": "Back",
   "вперед": "Forward",
-  "стр": "P.",
-  "из": "of",
+  "страница_из": "P. {{current}} of {{total}}",
   "год": "Year:",
   "рейтинг": "Rating:",
   "дата_релиза": "Release date:",
@@ -27,6 +26,7 @@
   "награды": "Awards:",
   "сборы": "Box office:",
   "производство": "Production:",
-  "веб-сайт": "Website:",
-  "рейтинги": "Ratings:"
+  "веб_сайт": "Website:",
+  "рейтинги": "Ratings:",
+  "инпут_фильмов_поиск": "Enter the movie title..."
 }

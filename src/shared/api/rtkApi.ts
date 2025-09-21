@@ -8,7 +8,7 @@ const rawBaseQuery = fetchBaseQuery({
   baseUrl: "https://www.omdbapi.com/",
   paramsSerializer: (params) => {
     return new URLSearchParams({
-      apikey: import.meta.env.VITE_OMDB_API_KEY,
+      apikey: process.env.OMDB_API_KEY,
       ...params,
     }).toString();
   },

@@ -28,16 +28,31 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }).concat(baseApi.middleware),
-});
+// export const store = configureStore({
+//   reducer: persistedReducer,
+//   middleware: (getDefaultMiddleware) =>
+//     getDefaultMiddleware({
+//       serializableCheck: {
+//         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+//       },
+//     }).concat(baseApi.middleware),
+// });
 
+export const createReduxStore = (initialState?: unknown) => {
+  return configureStore({
+    reducer: persistedReducer,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    preloadedState: initialState as any,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }).concat(baseApi.middleware),
+  });
+};
+
+export const store = createReduxStore();
 export const persistor = persistStore(store);
 
 export type AppState = ReturnType<typeof store.getState>;

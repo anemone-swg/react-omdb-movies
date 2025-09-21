@@ -1,1 +1,1 @@
-export { default as MovieContent } from "@/widgets/MovieContent/ui/MovieContent.tsx";
+export { default as MovieContent } from "./ui/MovieContent";

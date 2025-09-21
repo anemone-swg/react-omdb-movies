@@ -1,1 +1,1 @@
-export { default as MoviesLogic } from "./ui/MoviesLogic.tsx";
+export { default as MoviesLogic } from "./ui/MoviesLogic";

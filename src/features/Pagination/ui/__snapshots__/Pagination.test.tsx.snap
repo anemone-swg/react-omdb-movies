@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Pagination render correctly with page = 5 1`] = `
+<span
+  class="px-4 py-2"
+  data-testid="pagination-page"
+>
+  Страница 5 из 10
+</span>
+`;
+
+exports[`Pagination renders correctly with page = 5 1`] = `
+<span
+  class="px-4 py-2"
+  data-testid="pagination-page"
+>
+  Страница 5 из 10
+</span>
+`;

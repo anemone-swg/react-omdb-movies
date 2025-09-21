@@ -35,7 +35,10 @@ const Pagination = ({
   return (
     <>
       {!isFetching && totalResults && Number(totalResults) > 0 && (
-        <div className="flex justify-center gap-4 mt-6">
+        <div
+          data-testid={"pagination-div"}
+          className="flex justify-center gap-4 mt-6"
+        >
           <button
             className="bg-button text-white px-4 py-2 rounded transition-colors disabled:opacity-50"
             disabled={page === 1 || isFetching}
@@ -43,8 +46,11 @@ const Pagination = ({
           >
             {t("назад")}
           </button>
-          <span className="px-4 py-2">
-            {t("стр")} {page} {t("из")} {Math.ceil(Number(totalResults) / 10)}
+          <span data-testid={"pagination-page"} className="px-4 py-2">
+            {t("страница_из", {
+              current: page,
+              total: Math.ceil(Number(totalResults) / 10),
+            })}
           </span>
           <button
             className="bg-button hover:bg-button-hover text-white px-4 py-2 rounded transition-colors disabled:opacity-50"
