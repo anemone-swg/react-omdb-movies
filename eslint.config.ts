@@ -16,12 +16,13 @@ export default defineConfig([
     languageOptions: {
       parserOptions: {
         tsconfigRootDir: path.resolve(__dirname),
-        project: "./tsconfig.json",
+        project: ["./tsconfig.json", "./tsconfig.e2e.json"],
       },
       globals: {
         ...globals.browser,
         ...globals.node,
         ...globals.jest,
+        WebdriverIO: "readonly",
         process: "readonly",
       },
     },
