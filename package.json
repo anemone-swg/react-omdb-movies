@@ -7,7 +7,8 @@
     "build": "cross-env NODE_ENV=production webpack --env mode=production",
     "lint:styles": "stylelint \"src/**/*.{css,scss}\"",
     "unit": "jest",
-    "wdio": "wdio run ./wdio.conf.ts"
+    "wdio": "wdio run ./wdio.conf.ts",
+    "e2e": "start-server-and-test 'npm run dev' http://localhost:3000 'wdio run wdio.conf.ts'"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
@@ -84,6 +85,7 @@
     "react-refresh-typescript": "^2.0.10",
     "sass": "^1.92.1",
     "sass-loader": "^16.0.5",
+    "start-server-and-test": "^2.1.2",
     "style-loader": "^4.0.0",
     "stylelint": "^16.23.1",
     "stylelint-config-recess-order": "^7.3.0",

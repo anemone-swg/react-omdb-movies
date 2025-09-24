@@ -23,7 +23,7 @@ export const config: WebdriverIO.Config = {
     ui: "bdd",
     timeout: 60000,
   },
-  baseUrl: "http://localhost:8080",
+  baseUrl: "http://localhost:3000",
 
   /**
    * Gets executed once before all workers get launched.
