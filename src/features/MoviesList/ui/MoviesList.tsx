@@ -39,10 +39,14 @@ const MoviesList = ({
       {isFetching && <Loader />}
       {error && <ErrLoadingMessage />}
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div
+        data-testid={"movies-list"}
+        className="grid grid-cols-2 md:grid-cols-4 gap-4"
+      >
         {!isFetching &&
           uniqueMovies?.map((movie) => (
             <Link
+              data-testid="movie"
               key={movie.imdbID}
               to={Routes.getMovieSearchDetail(movie.imdbID)}
               className="p-2 border rounded-lg overflow-hidden shadow flex flex-col justify-center items-center transform transition-transform duration-200 ease-in-out

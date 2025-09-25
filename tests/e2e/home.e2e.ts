@@ -6,7 +6,5 @@ describe("home container", () => {
     const container = HomePage.homePageContainer;
     await expect(container).toBeExisting();
     await expect(container).toMatchElementSnapshot("homePageContainer");
-    // await HomePage.login("tomsmith", "SuperSecretPassword!");
-    // await expect(SecurePage.flashAlert).toMatchElementSnapshot("flashAlert");
   });
 });

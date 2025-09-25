@@ -7,12 +7,6 @@ class HomePage extends Page {
     return $('[data-testid="home-page-container"]');
   }
 
-  // public async login(username: string, password: string) {
-  //   await this.inputUsername.setValue(username);
-  //   await this.inputPassword.setValue(password);
-  //   await this.btnSubmit.click();
-  // }
-
   public open() {
     return super.open(Routes.HOME);
   }
