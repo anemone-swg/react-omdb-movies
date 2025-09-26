@@ -36,6 +36,7 @@
   "include": [
     "src",
     "*.config.ts",
-    "setupJest.ts"
+    "setupJest.ts",
+    ".storybook"
   ]
 }
