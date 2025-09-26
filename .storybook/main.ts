@@ -1,5 +1,4 @@
 import type { StorybookConfig } from "@storybook/react-webpack5";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import path from "path";
 
 const isDev = process.env.NODE_ENV === "development";
@@ -23,7 +22,7 @@ const config: StorybookConfig = {
       config.module.rules.push({
         test: /\.s[ac]ss$/i,
         use: [
-          isDev ? "style-loader" : MiniCssExtractPlugin.loader,
+          "style-loader",
           {
             loader: "css-loader",
             options: {

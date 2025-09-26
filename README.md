@@ -5,6 +5,7 @@
 - React, TypeScript, SCSS
 - RTK Query, Redux
 - Webpack, Eslint, Stylelint, Prettier, PostCSS, Babel
+- Jest, Webdriver, Storybook, Chromatic
 
 ## Запуск:
 
