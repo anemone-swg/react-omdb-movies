@@ -1,13 +1,15 @@
 import { render, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
-import { Navbar } from "@/widgets/Navbar";
 import {
   createMemoryRouter,
   MemoryRouter,
   RouterProvider,
 } from "react-router-dom";
+import { Provider } from "react-redux";
 import { routesConfig } from "@/app/providers/AppRouter";
+import { createReduxStore } from "@/app/store/store";
 import { Routes } from "@/shared/config/route/routes";
+import Navbar from "./Navbar";
 
 jest.mock("@/features/NavbarThemeBtn", () => ({
   __esModule: true,
@@ -40,7 +42,11 @@ describe("Navbar", () => {
     const router = createMemoryRouter(routesConfig, {
       initialEntries: [Routes.HOME],
     });
-    render(<RouterProvider router={router} />);
+    render(
+      <Provider store={createReduxStore()}>
+        <RouterProvider router={router} />
+      </Provider>,
+    );
 
     const moviesNavbarBtn = screen.getByTestId("movies-navbar-btn");
     expect(moviesNavbarBtn).toBeInTheDocument();
@@ -57,7 +63,11 @@ describe("Navbar", () => {
     const router = createMemoryRouter(routesConfig, {
       initialEntries: [Routes.MOVIES],
     });
-    render(<RouterProvider router={router} />);
+    render(
+      <Provider store={createReduxStore()}>
+        <RouterProvider router={router} />
+      </Provider>,
+    );
 
     const linkBtn = screen.getByTestId("link-to-search-movies");
     expect(linkBtn).toBeInTheDocument();

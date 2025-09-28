@@ -1,6 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
 import { routesConfig } from "@/app/providers/AppRouter";
+import { createReduxStore } from "@/app/store/store";
 import { Routes } from "@/shared/config/route/routes";
 
 jest.mock("@/widgets/Navbar", () => ({
@@ -19,7 +21,11 @@ describe("навигация по AppRouter", () => {
       initialEntries: [Routes.HOME],
     });
 
-    render(<RouterProvider router={router} />);
+    render(
+      <Provider store={createReduxStore()}>
+        <RouterProvider router={router} />
+      </Provider>,
+    );
     expect(screen.getByText("Mock Navbar")).toBeInTheDocument();
     expect(screen.getByText("Mock Home Content")).toBeInTheDocument();
     screen.debug();
