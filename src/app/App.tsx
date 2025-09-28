@@ -1,10 +1,17 @@
 import "./styles/App.scss";
 import { Outlet } from "react-router-dom";
+import { ErrorBoundary } from "react-error-boundary";
+import { GlobalErrorFallback } from "@/widgets/GlobalErrorFallback";
 
 const App = () => {
   return (
     <>
-      <Outlet />
+      <ErrorBoundary
+        FallbackComponent={GlobalErrorFallback}
+        onReset={() => location.reload()}
+      >
+        <Outlet />
+      </ErrorBoundary>
     </>
   );
 };

@@ -28,5 +28,6 @@
   "производство": "Production:",
   "веб_сайт": "Website:",
   "рейтинги": "Ratings:",
-  "инпут_фильмов_поиск": "Enter the movie title..."
+  "инпут_фильмов_поиск": "Enter the movie title...",
+  "возникла_непредвиденная_ошибка": "An unexpected error occurred."
 }
