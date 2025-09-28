@@ -4,7 +4,6 @@ import type { Movie } from "../model/types/movie";
 import { getUniqueMovies } from "../lib/helpers/getUniqueMovies";
 import { Loader } from "@/shared/ui/Loader";
 import { Routes } from "@/shared/config/route/routes";
-import { ErrLoadingMessage } from "@/shared/ui/ErrLoadingMessage";
 
 /**
  * Props компонента MoviesList.
@@ -34,10 +33,13 @@ const MoviesList = ({
 }: MoviesListProps): JSX.Element => {
   const uniqueMovies = data ? getUniqueMovies(data) : [];
 
+  if (error) {
+    throw new Error(error);
+  }
+
   return (
     <>
       {isFetching && <Loader />}
-      {error && <ErrLoadingMessage />}
 
       <div
         data-testid={"movies-list"}
