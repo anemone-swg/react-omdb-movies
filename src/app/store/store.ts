@@ -1,4 +1,8 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import {
+  combineReducers,
+  configureStore,
+  UnknownAction,
+} from "@reduxjs/toolkit";
 import {
   FLUSH,
   PAUSE,
@@ -14,11 +18,21 @@ import { baseApi } from "@/shared/api/rtkApi";
 import { paginationReducer } from "@/features/Pagination";
 import { searchMoviesInputReducer } from "@/features/SearchMoviesInput";
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   pagination: paginationReducer,
   searchMoviesInput: searchMoviesInputReducer,
   [baseApi.reducerPath]: baseApi.reducer,
 });
+
+const rootReducer = (
+  state: ReturnType<typeof appReducer> | undefined,
+  action: UnknownAction,
+) => {
+  if (action?.type === "RESET_STORE") {
+    state = undefined;
+  }
+  return appReducer(state, action);
+};
 
 const persistConfig = {
   key: "root",
@@ -27,16 +41,6 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-// export const store = configureStore({
-//   reducer: persistedReducer,
-//   middleware: (getDefaultMiddleware) =>
-//     getDefaultMiddleware({
-//       serializableCheck: {
-//         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-//       },
-//     }).concat(baseApi.middleware),
-// });
 
 export const createReduxStore = (initialState?: unknown) => {
   return configureStore({
