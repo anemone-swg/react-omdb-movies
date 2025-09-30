@@ -32,5 +32,9 @@ jobs:
         run: npm run lint:styles
       - name: unit testing
         run: npm run test:unit
+      - name: build storybook
+        run: npm run build-storybook
+      - name: ui testing
+        run: npm run chromatic
 #      - name: e2e testing
 #        run: npm run test:e2e
