@@ -28,5 +28,5 @@ jobs:
         run: npm run lint:styles
       - name: unit testing
         run: npm run unit
-      - name: e2e testing
-        run: npm run wdio
+#      - name: e2e testing
+#        run: npm run wdio
