@@ -24,9 +24,13 @@ jobs:
         run: npm install
       - name: build production project
         run: npm run build
-      - name: linting css
+      - name: linting by eslint
+        run: npm run lint:eslint
+      - name: linting typescript
+        run: npm run lint:ts
+      - name: linting styles
         run: npm run lint:styles
       - name: unit testing
-        run: npm run unit
+        run: npm run test:unit
 #      - name: e2e testing
-#        run: npm run wdio
+#        run: npm run test:e2e
