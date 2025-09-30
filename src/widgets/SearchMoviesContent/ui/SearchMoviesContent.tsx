@@ -1,3 +1,4 @@
+import { ErrorBoundary } from "react-error-boundary";
 import {
   SearchMoviesInput,
   selectSearch,
@@ -5,7 +6,11 @@ import {
   selectYear,
 } from "@/features/SearchMoviesInput";
 import { Pagination, selectPage } from "@/features/Pagination";
-import { MoviesList, useGetMoviesQuery } from "@/features/MoviesList";
+import {
+  MoviesList,
+  MoviesListFallback,
+  useGetMoviesQuery,
+} from "@/features/MoviesList";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 
 const SearchMoviesContent = () => {
@@ -24,11 +29,16 @@ const SearchMoviesContent = () => {
   return (
     <>
       <SearchMoviesInput />
-      <MoviesList
-        data={data?.Search}
-        isFetching={isFetching}
-        error={data?.Error}
-      />
+      <ErrorBoundary
+        FallbackComponent={MoviesListFallback}
+        resetKeys={[search, data]}
+      >
+        <MoviesList
+          data={data?.Search}
+          isFetching={isFetching}
+          error={data?.Error}
+        />
+      </ErrorBoundary>
       <Pagination totalResults={data?.totalResults} isFetching={isFetching} />
     </>
   );

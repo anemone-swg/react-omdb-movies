@@ -6,6 +6,10 @@
       "DOM.Iterable",
       "ESNext"
     ],
+    "types": [
+      "node",
+      "jest"
+    ],
     "module": "ESNext",
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
@@ -31,6 +35,8 @@
   },
   "include": [
     "src",
-    "*.ts"
+    "*.config.ts",
+    "setupJest.ts",
+    ".storybook"
   ]
 }

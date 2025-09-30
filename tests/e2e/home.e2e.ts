@@ -1,0 +1,10 @@
+import HomePage from "../pages/home.page";
+
+describe("home container", () => {
+  it("should get home container", async () => {
+    await HomePage.open();
+    const container = HomePage.homePageContainer;
+    await expect(container).toBeExisting();
+    await expect(container).toMatchElementSnapshot("homePageContainer");
+  });
+});

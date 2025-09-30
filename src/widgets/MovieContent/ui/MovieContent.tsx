@@ -18,8 +18,16 @@ const MovieContent = () => {
 
   return (
     <>
-      <div className="min-h-screen px-4 py-8 max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-4 text-center">{data?.Title}</h1>
+      <div
+        data-testid={"movie-page"}
+        className="min-h-screen px-4 py-8 max-w-4xl mx-auto"
+      >
+        <h1
+          data-testid={"movie-title"}
+          className="text-3xl font-bold mb-4 text-center"
+        >
+          {data?.Title}
+        </h1>
         <img
           src={data?.Poster !== "N/A" ? data?.Poster : "/no-image.jpg"}
           alt={data?.Title}

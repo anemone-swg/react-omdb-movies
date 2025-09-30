@@ -26,8 +26,13 @@ const MovieInputGroup = () => {
 
   return (
     <div className="flex gap-2 max-w-3xl mx-auto px-4 mb-4">
-      <MovieInput value={query} onChange={handleChange} />
+      <MovieInput
+        data-testid={"search-movie-input"}
+        value={query}
+        onChange={handleChange}
+      />
       <button
+        data-testid={"search-movie-btn"}
         className="bg-button hover:bg-button-hover text-white px-4 py-2 rounded transition-colors"
         onClick={handleSearch}
       >

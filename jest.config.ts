@@ -27,6 +27,7 @@ const config: Config = {
     "\\.(css|scss)$": "identity-obj-proxy",
   },
   setupFilesAfterEnv: ["<rootDir>/setupJest.ts"],
+  transformIgnorePatterns: ["node_modules/(?!react-error-boundary)"],
 
   // All imported modules in your tests should be mocked automatically
   // automock: false,
