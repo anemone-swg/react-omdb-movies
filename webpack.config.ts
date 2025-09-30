@@ -118,7 +118,7 @@ export default (env: Env = {}) => {
             chunkFilename: "css/[name].[contenthash:8].css",
           })
         : undefined,
-      isProd && new BundleAnalyzerPlugin({}),
+      isDev && new BundleAnalyzerPlugin({}),
       isProd
         ? new CopyPlugin({
             patterns: [
