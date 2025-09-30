@@ -34,7 +34,7 @@ const NavbarBtn = ({
     to={to}
     className={({ isActive }) =>
       clsx(
-        "text-white px-4 py-2 rounded flex items-center gap-2 transition-colors",
+        "text-white px-8 py-2 rounded flex items-center gap-2 transition-colors",
         isActive ? "bg-button-hover" : "bg-button hover:bg-button-hover",
         className,
       )
