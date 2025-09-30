@@ -1,8 +1,8 @@
+import { ErrorBoundary } from "react-error-boundary";
 import type { Meta, StoryObj } from "@storybook/react-webpack5";
-import { MemoryRouter } from "react-router-dom";
-import { Movie } from "@/features/MoviesList";
+import type { Movie } from "../model/types/movie";
 import MoviesList from "./MoviesList";
-import { Routes } from "@/shared/config/route/routes";
+import MoviesListFallback from "./MoviesListFallback";
 
 const mockMovies: Movie[] = [
   {
@@ -24,17 +24,10 @@ const mockMovies: Movie[] = [
 ];
 
 const meta = {
-  title: "Example/MoviesList",
+  title: "Features/MoviesList",
   component: MoviesList,
   parameters: { layout: "fullscreen" },
   tags: ["autodocs"],
-  decorators: [
-    (Story) => (
-      <MemoryRouter initialEntries={[Routes.HOME]}>
-        <Story />
-      </MemoryRouter>
-    ),
-  ],
 } satisfies Meta<typeof MoviesList>;
 
 export default meta;
@@ -65,4 +58,11 @@ export const ListWithError: Story = {
     isFetching: false,
     error: "Error",
   },
+  decorators: [
+    (Story) => (
+      <ErrorBoundary FallbackComponent={MoviesListFallback}>
+        <Story />
+      </ErrorBoundary>
+    ),
+  ],
 };

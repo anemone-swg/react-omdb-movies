@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-webpack5";
-import MovieInput from "./MovieInput";
 import { action } from "storybook/actions";
+import MovieInput from "./MovieInput";
 
 const meta = {
-  title: "Example/MovieInput",
+  title: "Shared/MovieInput",
   component: MovieInput,
   parameters: {
     layout: "centered",
