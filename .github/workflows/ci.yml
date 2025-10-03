@@ -37,7 +37,9 @@ jobs:
         run: npm run test:unit
       - name: build storybook
         run: npm run build-storybook
+        if: always()
       - name: ui testing by Chromatic
         run: npm run chromatic
+        if: always()
 #      - name: e2e testing
 #        run: npm run test:e2e
