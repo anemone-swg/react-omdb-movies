@@ -1,11 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { contentType } from "@/shared/types/contentType";
-
-export interface SearchMoviesInputState {
-  search: string;
-  type: contentType;
-  year: number | undefined;
-}
+import type { SearchMoviesInputState } from "./types/SearchMoviesInputState";
 
 const initialState: SearchMoviesInputState = {
   search: "",

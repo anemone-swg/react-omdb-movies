@@ -16,13 +16,22 @@ jest.mock("react-i18next", () => ({
   }),
 }));
 
+// const asyncReducers: DeepPartial<ReducersMapObject<StateSchema>> = {
+//   pagination: paginationReducer,
+// };
+
 describe("Pagination", () => {
   test("render correctly with page = 5", () => {
     render(
       <Provider
-        store={createReduxStore({
-          pagination: { page: 5 },
-        })}
+        store={createReduxStore(
+          {
+            pagination: { page: 5 },
+          },
+          // {
+          //   asyncReducers,
+          // },
+        )}
       >
         <Pagination totalResults={"100"} />
       </Provider>,

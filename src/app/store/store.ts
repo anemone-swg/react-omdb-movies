@@ -1,8 +1,4 @@
-import {
-  combineReducers,
-  configureStore,
-  UnknownAction,
-} from "@reduxjs/toolkit";
+import { configureStore, ReducersMapObject } from "@reduxjs/toolkit";
 import {
   FLUSH,
   PAUSE,
@@ -14,25 +10,10 @@ import {
   REHYDRATE,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { baseApi } from "@/shared/api/rtkApi";
-import { paginationReducer } from "@/features/Pagination";
 import { searchMoviesInputReducer } from "@/features/SearchMoviesInput";
-
-const appReducer = combineReducers({
-  pagination: paginationReducer,
-  searchMoviesInput: searchMoviesInputReducer,
-  [baseApi.reducerPath]: baseApi.reducer,
-});
-
-const rootReducer = (
-  state: ReturnType<typeof appReducer> | undefined,
-  action: UnknownAction,
-) => {
-  if (action?.type === "RESET_STORE") {
-    state = undefined;
-  }
-  return appReducer(state, action);
-};
+import { baseApi } from "@/shared/api/rtkApi";
+import { createReducerManager } from "./reducerManager";
+import type { ReduxStoreWithManager, StateSchema } from "./StateSchema";
 
 const persistConfig = {
   key: "root",
@@ -40,10 +21,20 @@ const persistConfig = {
   blacklist: [baseApi.reducerPath],
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+export const createReduxStore = (
+  initialState?: unknown,
+  asyncReducers?: ReducersMapObject<StateSchema>,
+) => {
+  const rootReducers: ReducersMapObject<StateSchema> = {
+    ...asyncReducers,
+    searchMoviesInput: searchMoviesInputReducer,
+    [baseApi.reducerPath]: baseApi.reducer,
+  };
 
-export const createReduxStore = (initialState?: unknown) => {
-  return configureStore({
+  const reducerManager = createReducerManager(rootReducers);
+  const persistedReducer = persistReducer(persistConfig, reducerManager.reduce);
+
+  const store = configureStore({
     reducer: persistedReducer,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     preloadedState: initialState as any,
@@ -53,10 +44,14 @@ export const createReduxStore = (initialState?: unknown) => {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
       }).concat(baseApi.middleware),
-  });
+  }) as ReduxStoreWithManager;
+
+  store.reducerManager = reducerManager;
+  return store;
 };
 
 export const store = createReduxStore();
+
 export const persistor = persistStore(store);
 
 export type AppState = ReturnType<typeof store.getState>;

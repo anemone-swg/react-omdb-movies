@@ -30,7 +30,11 @@ export const routesConfig = [
           },
           {
             path: Routes.MOVIES_SEARCH,
-            element: <MoviesSearchPage />,
+            element: (
+              <Suspense fallback={<Loader />}>
+                <MoviesSearchPage />,
+              </Suspense>
+            ),
           },
           {
             path: Routes.MOVIES_SEARCH_DETAIL,

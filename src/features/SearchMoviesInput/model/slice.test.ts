@@ -1,8 +1,6 @@
-import {
-  searchMoviesInputActions,
-  searchMoviesInputReducer,
-  SearchMoviesInputState,
-} from "./slice";
+import { searchMoviesInputActions, searchMoviesInputReducer } from "./slice";
+
+import type { SearchMoviesInputState } from "./types/SearchMoviesInputState";
 
 describe(`SearchMoviesInput's selectors`, () => {
   let initialTestState: SearchMoviesInputState;

@@ -35,6 +35,7 @@ const SearchMoviesInput = (): JSX.Element => {
           value={type ?? ""}
           onChange={(e) =>
             dispatch(
+              // @ts-expect-error: не та типизация для санков
               setTypeWithResetPage(
                 e.target.value === ""
                   ? undefined
@@ -53,6 +54,7 @@ const SearchMoviesInput = (): JSX.Element => {
           value={year ?? ""}
           onChange={(e) =>
             dispatch(
+              // @ts-expect-error: не та типизация для санков
               setYearWithResetPage(
                 e.target.value === "" ? undefined : Number(e.target.value),
               ),

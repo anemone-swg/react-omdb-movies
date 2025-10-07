@@ -1,1 +1,1 @@
-export { default as MoviesSearchPage } from "./ui/MoviesSearchPage";
+export { MoviesSearchPageAsync as MoviesSearchPage } from "./ui/MoviesSearchPage.async";
