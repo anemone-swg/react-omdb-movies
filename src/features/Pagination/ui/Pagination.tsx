@@ -38,7 +38,7 @@ const Pagination = ({
   const page = useAppSelector(selectPage) ?? 1;
 
   return (
-    <DynamicModuleLoader removeAfterUnmount reducers={initialReducers}>
+    <DynamicModuleLoader removeAfterUnmount={false} reducers={initialReducers}>
       {!isFetching && totalResults && Number(totalResults) > 0 && (
         <div
           data-testid={"pagination-div"}

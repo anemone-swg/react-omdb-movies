@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import {
   SearchMoviesInput,
@@ -12,6 +13,7 @@ import {
   useGetMoviesQuery,
 } from "@/features/MoviesList";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
+import { Loader } from "@/shared/ui/Loader";
 
 const SearchMoviesContent = () => {
   const search = useAppSelector(selectSearch);
@@ -39,7 +41,9 @@ const SearchMoviesContent = () => {
           error={data?.Error}
         />
       </ErrorBoundary>
-      <Pagination totalResults={data?.totalResults} isFetching={isFetching} />
+      <Suspense fallback={<Loader />}>
+        <Pagination totalResults={data?.totalResults} isFetching={isFetching} />
+      </Suspense>
     </>
   );
 };
