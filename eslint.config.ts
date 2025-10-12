@@ -26,6 +26,7 @@ export default defineConfig([
         ...globals.jest,
         WebdriverIO: "readonly",
         process: "readonly",
+        __PROJECT__: true,
       },
     },
     rules: {

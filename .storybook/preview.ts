@@ -1,9 +1,9 @@
 import type { Preview } from "@storybook/react-webpack5";
 import "@/app/styles/App.scss";
-import { RouterDecorator } from "./RouterDecorator";
-import { ThemeDecorator } from "./ThemeDecorator";
-import { StoreDecorator } from "./StoreDecorator";
-import { I18nDecorator } from "./I18nDecorator";
+import { RouterDecorator } from "@/shared/config/storybook/RouterDecorator";
+import { ThemeDecorator } from "@/shared/config/storybook/ThemeDecorator";
+import { StoreDecorator } from "@/shared/config/storybook/StoreDecorator";
+import { I18nDecorator } from "@/shared/config/storybook/I18nDecorator";
 
 export const globalTypes = {
   theme: {
@@ -38,7 +38,12 @@ const preview: Preview = {
       },
     },
   },
-  decorators: [RouterDecorator, ThemeDecorator, StoreDecorator, I18nDecorator],
+  decorators: [
+    RouterDecorator,
+    ThemeDecorator,
+    StoreDecorator(),
+    I18nDecorator,
+  ],
 };
 
 export default preview;

@@ -24,6 +24,7 @@ const SearchMoviesContent = () => {
   const { data, isFetching } = useGetMoviesQuery(
     { search, page, type, year },
     {
+      // skip: !search || __PROJECT__ === "storybook",
       skip: !search,
     },
   );

@@ -4,7 +4,8 @@ import { paginationActions, paginationReducer } from "../model/slice";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useTranslation } from "react-i18next";
-import { DynamicModuleLoader, ReducersList } from "@/shared/lib/components/DynamicModuleLoader";
+import { DynamicModuleLoader } from "@/shared/lib/components/DynamicModuleLoader";
+import { ReducersList } from "@/shared/types/reducersList";
 
 /**
  * Props компонента Pagination.

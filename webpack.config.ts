@@ -132,6 +132,7 @@ export default (env: Env = {}) => {
       isDev && new ReactRefreshPlugin({}),
       new webpack.DefinePlugin({
         "process.env": JSON.stringify(process.env),
+        __PROJECT__: JSON.stringify("frontend"),
       }),
     ].filter(Boolean),
     devtool: isDev && "inline-source-map",
