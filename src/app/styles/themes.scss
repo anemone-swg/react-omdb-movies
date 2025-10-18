@@ -3,6 +3,8 @@
   --scrollbar-thumb-hover: var(--scrollbar-thumb-light-hover);
   --background-color: var(--background-color-light);
   --text-color: var(--text-color-light);
+  --skeleton-shadow: var(--skeleton-shadow-light);
+  --skeleton-color: var(--skeleton-color-light);
 }
 
 [data-theme="dark"] {
@@ -10,4 +12,6 @@
   --scrollbar-thumb-hover: var(--scrollbar-thumb-dark-hover);
   --background-color: var(--background-color-dark);
   --text-color: var(--text-color-dark);
+  --skeleton-shadow: var(--skeleton-shadow-dark);
+  --skeleton-color: var(--skeleton-color-dark);
 }
