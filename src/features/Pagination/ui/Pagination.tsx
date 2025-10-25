@@ -1,5 +1,5 @@
 import type { JSX } from "react";
-import { selectPage } from "../model/selectors";
+import { selectPage, selectThisPagination } from "../model/selectors";
 import { paginationActions, paginationReducer } from "../model/slice";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
@@ -37,6 +37,11 @@ const Pagination = ({
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const page = useAppSelector(selectPage) ?? 1;
+  const isActive = useAppSelector(selectThisPagination) ?? true;
+
+  if (!isActive) {
+    return <></>;
+  }
 
   return (
     <DynamicModuleLoader removeAfterUnmount={false} reducers={initialReducers}>

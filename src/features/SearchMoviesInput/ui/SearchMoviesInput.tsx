@@ -7,6 +7,9 @@ import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { Select } from "@/shared/ui/Select";
 import { contentType } from "@/shared/types/contentType";
+import { MdOutlineInsertPageBreak } from "react-icons/md";
+import { PiMouseScrollLight } from "react-icons/pi";
+import { paginationActions } from "@/features/Pagination";
 
 /**
  * React-компонент, отображающий input и кнопку для поиска фильмов.
@@ -68,6 +71,14 @@ const SearchMoviesInput = (): JSX.Element => {
     [dispatch],
   );
 
+  const changePageBasedPagination = () => {
+    dispatch(paginationActions.setThisPagination(true));
+  };
+
+  const changeInfiniteScrollPagination = () => {
+    dispatch(paginationActions.setThisPagination(false));
+  };
+
   return (
     <>
       <h1 className="text-2xl font-bold mb-6 text-center">
@@ -85,6 +96,18 @@ const SearchMoviesInput = (): JSX.Element => {
           options={yearOptions}
           onChange={onChangeYear}
         />
+        <button
+          onClick={changePageBasedPagination}
+          className="bg-button hover:bg-button-hover text-white px-4 py-2 rounded transition-colors"
+        >
+          <MdOutlineInsertPageBreak />
+        </button>
+        <button
+          onClick={changeInfiniteScrollPagination}
+          className="bg-button hover:bg-button-hover text-white px-4 py-2 rounded transition-colors"
+        >
+          <PiMouseScrollLight />
+        </button>
       </div>
     </>
   );
