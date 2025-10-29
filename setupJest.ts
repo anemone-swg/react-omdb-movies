@@ -19,3 +19,11 @@ jest.mock("react-i18next", () => {
     changeLanguageMock,
   };
 });
+
+// Мок IntersectionObserver для Jest
+global.IntersectionObserver = class {
+  constructor(private callback: unknown) {}
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+} as unknown as typeof IntersectionObserver;

@@ -2,12 +2,15 @@ import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { createReduxStore } from "@/app/store/store";
 import SearchMoviesContent from "./SearchMoviesContent";
-import { SearchMoviesResponse, useGetMoviesQuery } from "@/features/MoviesList";
+import {
+  SearchMoviesResponse,
+  useGetMoviesInfiniteQuery,
+} from "@/features/MoviesList";
 import { MemoryRouter } from "react-router-dom";
 
 jest.mock("@/features/MoviesList", () => ({
   ...jest.requireActual("@/features/MoviesList"),
-  useGetMoviesQuery: jest.fn(),
+  useGetMoviesInfiniteQuery: jest.fn(),
 }));
 
 let mockData: SearchMoviesResponse;
@@ -29,9 +32,15 @@ beforeAll(() => {
 });
 
 test("render SearchMoviesContent with mocked RTK Query data", () => {
-  (useGetMoviesQuery as jest.Mock).mockReturnValue({
-    data: mockData,
+  (useGetMoviesInfiniteQuery as jest.Mock).mockReturnValue({
+    data: {
+      pages: [mockData],
+    },
     isFetching: false,
+    isLoading: false,
+    isFetchingNextPage: false,
+    hasNextPage: false,
+    fetchNextPage: jest.fn(),
   });
 
   render(

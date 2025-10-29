@@ -5,6 +5,8 @@ declare namespace NodeJS {
   }
 }
 
+declare const __PROJECT__: "frontend" | "storybook" | "jest";
+
 declare module "*.scss";
 
 declare module "*.module.scss" {

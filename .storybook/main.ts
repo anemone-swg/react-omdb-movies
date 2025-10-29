@@ -1,15 +1,21 @@
 import type { StorybookConfig } from "@storybook/react-webpack5";
 import path from "path";
+import webpack from "webpack";
 
 const isDev = process.env.NODE_ENV === "development";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
-  addons: ["@storybook/addon-webpack5-compiler-swc", "@storybook/addon-docs"],
+  addons: [
+    "@storybook/addon-webpack5-compiler-swc",
+    "@storybook/addon-docs",
+    "storybook-addon-mock",
+  ],
   framework: {
     name: "@storybook/react-webpack5",
     options: {},
   },
+  staticDirs: ["../public"],
   webpackFinal: async (config) => {
     if (config.resolve) {
       config.resolve.alias = {
@@ -49,6 +55,14 @@ const config: StorybookConfig = {
           },
         ],
       });
+    }
+
+    if (config.plugins) {
+      config.plugins.push(
+        new webpack.DefinePlugin({
+          __PROJECT__: JSON.stringify("storybook"),
+        }),
+      );
     }
 
     return config;

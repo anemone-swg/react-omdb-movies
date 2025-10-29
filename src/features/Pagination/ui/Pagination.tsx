@@ -1,9 +1,11 @@
-import type { JSX } from "react";
-import { selectPage } from "../model/selectors";
-import { paginationActions } from "../model/slice";
-import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
-import { useTranslation } from "react-i18next";
+import type {JSX} from "react";
+import {selectPage} from "../model/selectors";
+import {paginationActions, paginationReducer} from "../model/slice";
+import {useAppSelector} from "@/shared/lib/hooks/useAppSelector";
+import {useAppDispatch} from "@/shared/lib/hooks/useAppDispatch";
+import {useTranslation} from "react-i18next";
+import {DynamicModuleLoader} from "@/shared/lib/components/DynamicModuleLoader";
+import {ReducersList} from "@/shared/types/reducersList";
 
 /**
  * Props компонента Pagination.
@@ -16,6 +18,10 @@ export interface PaginationProps {
   totalResults: string | undefined;
   isFetching?: boolean;
 }
+
+const initialReducers: ReducersList = {
+  pagination: paginationReducer,
+};
 
 /**
  * React-компонент для пагинации.
@@ -30,10 +36,10 @@ const Pagination = ({
 }: PaginationProps): JSX.Element => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const page = useAppSelector(selectPage);
+  const page = useAppSelector(selectPage) ?? 1;
 
   return (
-    <>
+    <DynamicModuleLoader removeAfterUnmount={false} reducers={initialReducers}>
       {!isFetching && totalResults && Number(totalResults) > 0 && (
         <div
           data-testid={"pagination-div"}
@@ -63,7 +69,7 @@ const Pagination = ({
           </button>
         </div>
       )}
-    </>
+    </DynamicModuleLoader>
   );
 };
 

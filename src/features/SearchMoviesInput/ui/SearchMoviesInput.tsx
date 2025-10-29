@@ -1,11 +1,12 @@
-import React, { type JSX } from "react";
+import React, { type JSX, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { selectType, selectYear } from "../model/selectors";
 import { setTypeWithResetPage, setYearWithResetPage } from "../model/thunks";
 import MovieInputGroup from "./MovieInputGroup";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import type { contentType } from "@/shared/types/contentType";
+import { Select } from "@/shared/ui/Select";
+import { contentType } from "@/shared/types/contentType";
 
 /**
  * React-компонент, отображающий input и кнопку для поиска фильмов.
@@ -19,9 +20,52 @@ const SearchMoviesInput = (): JSX.Element => {
   const type = useAppSelector(selectType);
   const year = useAppSelector(selectYear);
 
-  const years = Array.from(
-    { length: 100 },
-    (_, i) => new Date().getFullYear() - i,
+  const years = useMemo(
+    () => Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i),
+    [],
+  );
+
+  const yearOptions = useMemo(
+    () => [
+      { value: "", content: t("все_годы_поиск") },
+      ...years.map((y) => ({
+        value: String(y),
+        content: String(y),
+      })),
+    ],
+    [t, years],
+  );
+
+  const movieOptions = useMemo(
+    () => [
+      { value: "", content: t("все_поиск") },
+      { value: "movie", content: t("фильмы_поиск") },
+      { value: "series", content: t("сериалы_поиск") },
+      { value: "episode", content: t("эпизоды_поиск") },
+    ],
+    [],
+  );
+
+  const onChangeMovie = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) =>
+      dispatch(
+        // @ts-expect-error: не та типизация для санков
+        setTypeWithResetPage(
+          e.target.value === "" ? undefined : (e.target.value as contentType),
+        ),
+      ),
+    [dispatch],
+  );
+
+  const onChangeYear = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) =>
+      dispatch(
+        // @ts-expect-error: не та типизация для санков
+        setYearWithResetPage(
+          e.target.value === "" ? undefined : Number(e.target.value),
+        ),
+      ),
+    [dispatch],
   );
 
   return (
@@ -31,42 +75,16 @@ const SearchMoviesInput = (): JSX.Element => {
       </h1>
       <MovieInputGroup />
       <div className="flex gap-2 max-w-3xl mx-auto px-4 mb-4">
-        <select
+        <Select
           value={type ?? ""}
-          onChange={(e) =>
-            dispatch(
-              setTypeWithResetPage(
-                e.target.value === ""
-                  ? undefined
-                  : (e.target.value as contentType),
-              ),
-            )
-          }
-          className="border p-2 rounded"
-        >
-          <option value="">{t("все_поиск")}</option>
-          <option value="movie">{t("фильмы_поиск")}</option>
-          <option value="series">{t("сериалы_поиск")}</option>
-          <option value="episode">{t("эпизоды_поиск")}</option>
-        </select>
-        <select
+          options={movieOptions}
+          onChange={onChangeMovie}
+        />
+        <Select
           value={year ?? ""}
-          onChange={(e) =>
-            dispatch(
-              setYearWithResetPage(
-                e.target.value === "" ? undefined : Number(e.target.value),
-              ),
-            )
-          }
-          className="border p-2 rounded"
-        >
-          <option value="">{t("все_годы_поиск")}</option>
-          {years.map((y) => (
-            <option key={y} value={y}>
-              {y}
-            </option>
-          ))}
-        </select>
+          options={yearOptions}
+          onChange={onChangeYear}
+        />
       </div>
     </>
   );
