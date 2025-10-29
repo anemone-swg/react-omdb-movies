@@ -11,9 +11,10 @@ import { baseApi } from "@/shared/api/rtkApi";
 
 export interface StateSchema {
   searchMoviesInput: SearchMoviesInputState;
+  pagination: PaginationState;
 
   // Асинхронные редюсеры
-  pagination?: PaginationState;
+  // empty
 
   // RTK Query
   [baseApi.reducerPath]: ReturnType<typeof baseApi.reducer>;

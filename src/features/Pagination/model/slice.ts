@@ -3,7 +3,6 @@ import type { PaginationState } from "./types/PaginationState";
 
 const initialState: PaginationState = {
   page: 1,
-  isActive: true,
 };
 
 export const paginationSlice = createSlice({
@@ -12,9 +11,6 @@ export const paginationSlice = createSlice({
   reducers: {
     setPage(state, action: PayloadAction<number>) {
       state.page = action.payload;
-    },
-    setThisPagination(state, action: PayloadAction<boolean>) {
-      state.isActive = action.payload;
     },
   },
 });

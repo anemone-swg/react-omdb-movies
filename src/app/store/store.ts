@@ -11,6 +11,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { searchMoviesInputReducer } from "@/features/SearchMoviesInput";
+import { paginationReducer } from "@/features/Pagination";
 import { baseApi } from "@/shared/api/rtkApi";
 import { createReducerManager } from "./reducerManager";
 import type { ReduxStoreWithManager, StateSchema } from "./StateSchema";
@@ -28,6 +29,7 @@ export const createReduxStore = (
   const rootReducers: ReducersMapObject<StateSchema> = {
     ...asyncReducers,
     searchMoviesInput: searchMoviesInputReducer,
+    pagination: paginationReducer,
     [baseApi.reducerPath]: baseApi.reducer,
   };
 

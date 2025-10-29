@@ -32,7 +32,9 @@ export function createReducerManager(
         keysToRemove = [];
       }
 
-      //@ts-expect-error combinerReducer требует полного стейта
+      // "`" добавлена, чтобы убрать ошибку
+      // директива нужна, если есть асинхронные редюсеры
+      // `@ts-expect-error: combinerReducer требует полного стейта
       return combinedReducer(state, action);
     },
 
