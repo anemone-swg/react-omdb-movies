@@ -1,5 +1,5 @@
 import "./styles/App.scss";
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import { ErrorBoundary } from "react-error-boundary";
 import { persistor } from "@/app/store/store";
 import { GlobalErrorFallback } from "@/widgets/GlobalErrorFallback";
@@ -20,6 +20,11 @@ const App = () => {
         }}
       >
         <Outlet />
+        <ScrollRestoration
+          getKey={(location, _matches) => {
+            return location.pathname;
+          }}
+        />
       </ErrorBoundary>
     </>
   );
