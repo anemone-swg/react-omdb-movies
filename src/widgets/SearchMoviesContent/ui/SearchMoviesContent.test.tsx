@@ -10,7 +10,7 @@ import { MemoryRouter } from "react-router-dom";
 
 jest.mock("@/features/MoviesList", () => ({
   ...jest.requireActual("@/features/MoviesList"),
-  useGetMoviesQuery: jest.fn(),
+  useGetMoviesInfiniteQuery: jest.fn(),
 }));
 
 let mockData: SearchMoviesResponse;
@@ -33,8 +33,14 @@ beforeAll(() => {
 
 test("render SearchMoviesContent with mocked RTK Query data", () => {
   (useGetMoviesInfiniteQuery as jest.Mock).mockReturnValue({
-    data: mockData,
+    data: {
+      pages: [mockData],
+    },
     isFetching: false,
+    isLoading: false,
+    isFetchingNextPage: false,
+    hasNextPage: false,
+    fetchNextPage: jest.fn(),
   });
 
   render(
