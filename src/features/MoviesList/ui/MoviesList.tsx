@@ -1,15 +1,10 @@
-import { JSX, memo, useMemo } from "react";
+import { memo, useMemo } from "react";
+import clsx from "clsx";
+import { VirtuosoGrid } from "react-virtuoso";
 import { getUniqueMovies } from "../lib/helpers/getUniqueMovies";
+import styles from "./MoviesList.module.scss";
 import { type Movie, MovieTile } from "@/entities/MovieTile";
 import { Skeleton } from "@/shared/ui/Skeleton";
-
-/**
- * Props компонента MoviesList.
- *
- * @property {Movie[] | undefined} data - Данные с поиска фильмов.
- * @property {boolean} isFetching - Флаг загрузки данных.
- * @property {string} error - Ошибка запроса.
- */
 
 export interface MoviesListProps {
   data?: Movie[];
@@ -17,51 +12,44 @@ export interface MoviesListProps {
   error?: string;
 }
 
-/**
- * React-компонент, отображающий список фильмов с поиска.
- *
- * @component
- * @param {MoviesListProps} props - Props компонента.
- * @returns {JSX.Element} JSX-элемент с найденными фильмами.
- */
-const MoviesList = ({
-  data,
-  isFetching,
-  error,
-}: MoviesListProps): JSX.Element => {
-  if (error) {
-    throw new Error(error);
-  }
+const MoviesList = ({ data, isFetching, error }: MoviesListProps) => {
+  if (error) throw new Error(error);
 
   const uniqueMovies = useMemo(
     () => (data ? getUniqueMovies(data) : []),
     [data],
   );
 
-  let content = uniqueMovies?.map((movie) => (
-    <MovieTile key={movie.imdbID} movie={movie} />
-  ));
-
-  if (isFetching) {
-    content = [
-      ...content,
-      ...Array.from({ length: 4 }).map((_, index) => (
-        <Skeleton
-          key={`skeleton-${index}`}
-          className="p-2 rounded-lg overflow-hidden shadow flex flex-col justify-center items-center"
-          height={326}
-        />
-      )),
+  const items = useMemo(() => {
+    const skeletonCount = isFetching ? 4 : 0;
+    return [
+      ...uniqueMovies,
+      ...Array.from({ length: skeletonCount }).map(() => null),
     ];
-  }
+  }, [uniqueMovies, isFetching]);
 
   return (
-    <div
-      data-testid={"movies-list"}
-      className="grid grid-cols-2 md:grid-cols-4 gap-4"
-    >
-      {content}
-    </div>
+    <VirtuosoGrid
+      data={items}
+      computeItemKey={(index, item) =>
+        item ? item.imdbID : `skeleton-${index}`
+      }
+      itemContent={(_, item) =>
+        item ? (
+          <MovieTile movie={item} className={styles.tile_virt_height} />
+        ) : (
+          <Skeleton
+            className={clsx(
+              styles.tile_virt_height,
+              "p-2 rounded-lg overflow-hidden shadow flex flex-col justify-center items-center",
+            )}
+          />
+        )
+      }
+      listClassName="grid grid-cols-2 md:grid-cols-4 gap-4"
+      useWindowScroll
+      endReached={undefined}
+    />
   );
 };
 

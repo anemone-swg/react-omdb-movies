@@ -2,19 +2,23 @@ import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import { Routes } from "@/shared/config/route/routes";
 import { Movie } from "../model/types/movie";
+import clsx from "clsx";
 
 export interface MovieTileProps {
   movie: Movie;
+  className?: string;
 }
 
-const MovieTile = ({ movie }: MovieTileProps) => {
+const MovieTile = ({ movie, className }: MovieTileProps) => {
   return (
     <Link
       data-testid="movie"
       key={movie.imdbID}
       to={Routes.getMovieSearchDetail(movie.imdbID)}
-      className="p-2 border rounded-lg overflow-hidden shadow flex flex-col justify-center items-center transform transition-transform duration-200 ease-in-out
-        hover:scale-[1.01] hover:shadow-lg"
+      className={clsx(
+        className,
+        "p-2 border rounded-lg overflow-hidden shadow flex flex-col justify-center items-center transform transition-transform duration-200 ease-in-out hover:scale-[1.01] hover:shadow-lg",
+      )}
     >
       <img
         loading="lazy"
