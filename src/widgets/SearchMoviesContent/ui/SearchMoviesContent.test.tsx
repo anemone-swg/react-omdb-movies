@@ -1,18 +1,32 @@
+import type { ReactNode } from "react";
+import { MemoryRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { createReduxStore } from "@/app/store/store";
+import { SearchMoviesResponse, useGetMoviesInfiniteQuery } from "@/features/MoviesList";
+import { Movie } from "@/entities/MovieTile";
 import SearchMoviesContent from "./SearchMoviesContent";
-import {
-  SearchMoviesResponse,
-  useGetMoviesInfiniteQuery,
-} from "@/features/MoviesList";
-import { MemoryRouter } from "react-router-dom";
 
 jest.mock("@/features/MoviesList", () => ({
   ...jest.requireActual("@/features/MoviesList"),
   useGetMoviesInfiniteQuery: jest.fn(),
 }));
 
+jest.mock("react-virtuoso", () => ({
+  VirtuosoGrid: ({
+    data,
+    itemContent,
+  }: {
+    data: Movie[];
+    itemContent: (index: number, item: Movie) => ReactNode;
+  }) => (
+    <div>
+      {data.map((item, index) => (
+        <div key={item.imdbID || index}>{itemContent(index, item)}</div>
+      ))}
+    </div>
+  ),
+}));
 let mockData: SearchMoviesResponse;
 
 beforeAll(() => {
