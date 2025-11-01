@@ -6,6 +6,8 @@ import pluginReact from "eslint-plugin-react";
 import prettierPlugin from "eslint-plugin-prettier";
 import storybook from "eslint-plugin-storybook";
 import { defineConfig } from "eslint/config";
+// @ts-expect-error no types for eslint-fsd-paths-plugin
+import fsdPathsPlugin from "eslint-fsd-paths-plugin";
 
 export default defineConfig([
   tseslint.configs.recommended,
@@ -13,7 +15,7 @@ export default defineConfig([
   storybook.configs["flat/recommended"],
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
-    plugins: { js, prettierPlugin },
+    plugins: { js, prettierPlugin, "fsd-paths": fsdPathsPlugin },
     extends: ["js/recommended"],
     languageOptions: {
       parserOptions: {
@@ -38,6 +40,7 @@ export default defineConfig([
           argsIgnorePattern: "^_",
         },
       ],
+      "fsd-paths/path-checker": "error",
     },
   },
 
