@@ -43,27 +43,23 @@ const SearchMoviesInput = (): JSX.Element => {
       { value: "series", content: t("сериалы_поиск") },
       { value: "episode", content: t("эпизоды_поиск") },
     ],
-    [],
+    [t],
   );
 
   const onChangeMovie = useCallback(
-    (e: React.ChangeEvent<HTMLSelectElement>) =>
+    (value: string) =>
       dispatch(
         // @ts-expect-error: не та типизация для санков
-        setTypeWithResetPage(
-          e.target.value === "" ? undefined : (e.target.value as contentType),
-        ),
+        setTypeWithResetPage(value === "" ? undefined : (value as contentType)),
       ),
     [dispatch],
   );
 
   const onChangeYear = useCallback(
-    (e: React.ChangeEvent<HTMLSelectElement>) =>
+    (value: string) =>
       dispatch(
         // @ts-expect-error: не та типизация для санков
-        setYearWithResetPage(
-          e.target.value === "" ? undefined : Number(e.target.value),
-        ),
+        setYearWithResetPage(value === "" ? undefined : Number(value)),
       ),
     [dispatch],
   );
@@ -74,14 +70,14 @@ const SearchMoviesInput = (): JSX.Element => {
         {t("поиск_фильмов")}
       </h1>
       <MovieInputGroup />
-      <div className="flex gap-2 max-w-3xl mx-auto px-4 mb-4">
+      <div className="flex justify-center gap-2 max-w-3xl mx-auto px-4 mb-4">
         <Select
           value={type ?? ""}
           options={movieOptions}
           onChange={onChangeMovie}
         />
         <Select
-          value={year ?? ""}
+          value={year ? String(year) : ""}
           options={yearOptions}
           onChange={onChangeYear}
         />
