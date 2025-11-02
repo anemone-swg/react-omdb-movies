@@ -5,6 +5,8 @@
   --text-color: var(--text-color-light);
   --skeleton-shadow: var(--skeleton-shadow-light);
   --skeleton-color: var(--skeleton-color-light);
+  --background-color-select: var(--background-color-select-light);
+  --background-color-option-hover: var(--background-color-option-hover-light);
 }
 
 [data-theme="dark"] {
@@ -14,4 +16,6 @@
   --text-color: var(--text-color-dark);
   --skeleton-shadow: var(--skeleton-shadow-dark);
   --skeleton-color: var(--skeleton-color-dark);
+  --background-color-select: var(--background-color-select-dark);
+  --background-color-option-hover: var(--background-color-option-hover-dark);
 }
