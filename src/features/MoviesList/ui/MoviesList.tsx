@@ -36,11 +36,11 @@ const MoviesList = ({ data, isFetching, error }: MoviesListProps) => {
       }
       itemContent={(_, item) =>
         item ? (
-          <MovieTile movie={item} className={styles.tile_virt_height} />
+          <MovieTile movie={item} className={styles.tileVirtHeight} />
         ) : (
           <Skeleton
             className={clsx(
-              styles.tile_virt_height,
+              styles.tileVirtHeight,
               "p-2 rounded-lg overflow-hidden shadow flex flex-col justify-center items-center",
             )}
           />
