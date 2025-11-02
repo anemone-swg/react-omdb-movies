@@ -17,6 +17,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.9",
     "@reduxjs/toolkit": "^2.9.0",
     "@storybook/builder-webpack5": "^9.1.9",
     "@storybook/react": "^9.1.9",
