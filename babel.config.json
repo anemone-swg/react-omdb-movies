@@ -15,5 +15,15 @@
         "runtime": "automatic"
       }
     ]
+  ],
+  "plugins": [
+    [
+      "./babel/babelRemovePropsPlugin.js",
+      {
+        "props": [
+          "data-testid"
+        ]
+      }
+    ]
   ]
 }
