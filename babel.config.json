@@ -16,14 +16,19 @@
       }
     ]
   ],
-  "plugins": [
-    [
-      "./babel/babelRemovePropsPlugin.js",
-      {
-        "props": [
-          "data-testid"
+  "env": {
+    "production": {
+      "plugins": [
+        [
+          "./babel/babelRemovePropsPlugin.js",
+          {
+            "props": [
+              "data-testid",
+              "debug"
+            ]
+          }
         ]
-      }
-    ]
-  ]
+      ]
+    }
+  }
 }
