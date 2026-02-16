@@ -15,5 +15,20 @@
         "runtime": "automatic"
       }
     ]
-  ]
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        [
+          "./babel/babelRemovePropsPlugin.js",
+          {
+            "props": [
+              "data-testid",
+              "debug"
+            ]
+          }
+        ]
+      ]
+    }
+  }
 }

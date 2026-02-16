@@ -1,4 +1,4 @@
-import type { Movie } from "./movie.ts";
+import type { Movie } from "@/entities/MovieTile";
 
 export interface SearchMoviesResponse {
   Search: Movie[];

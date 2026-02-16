@@ -1,48 +1,69 @@
-import React, { type JSX, memo, useMemo } from "react";
+import React, { type JSX, memo, ReactNode } from "react";
 import clsx from "clsx";
+import {
+  Listbox,
+  ListboxButton,
+  ListboxOption,
+  ListboxOptions,
+} from "@headlessui/react";
+import { FaCheck, FaChevronDown } from "react-icons/fa";
+import styles from "./Select.module.scss";
 
 export interface SelectOption {
   value: string;
-  content: string;
+  content: ReactNode;
 }
 
-/**
- * Props компонента Select.
- * @property {string} [className] - Кастомный класс.
- * @property {SelectOption[]} [options] - Опции select'а.
- */
-export interface SelectProps
-  extends React.SelectHTMLAttributes<HTMLSelectElement> {
-  className?: string;
+export interface SelectProps {
+  value?: string;
+  defaultValue?: string;
+  onChange: (value: string) => void;
   options?: SelectOption[];
+  className?: string;
 }
 
 /**
  * React-компонент, отображающий select.
  *
  * @component
- * @param {NavbarBtnProps} props - Props компонента.
+ * @param {SelectProps} props - Props компонента.
  * @returns {JSX.Element} JSX-элемент select'а.
  */
 const Select = ({
-  className,
+  value,
+  defaultValue,
+  onChange,
   options,
-  ...otherProps
+  className,
 }: SelectProps): JSX.Element => {
-  const optionsList = useMemo(
-    () =>
-      options?.map((opt) => (
-        <option value={opt.value} key={opt.value}>
-          {opt.content}
-        </option>
-      )),
-    [options],
-  );
+  const selectedOption = options?.find((opt) => opt.value === value);
 
   return (
-    <select {...otherProps} className={clsx("border p-2 rounded", className)}>
-      {optionsList}
-    </select>
+    <Listbox
+      as="div"
+      value={value}
+      onChange={onChange}
+      className={clsx(className, styles.select)}
+    >
+      <ListboxButton className={styles.selectButton}>
+        {selectedOption ? selectedOption.content : defaultValue}
+        <FaChevronDown className={styles.chevron} />
+      </ListboxButton>
+      <ListboxOptions className={styles.options}>
+        {options?.map((option) => (
+          <ListboxOption
+            key={option.value}
+            value={option.value}
+            className={({ selected }) =>
+              clsx(styles.option, selected && styles.optionSelected)
+            }
+          >
+            <FaCheck className={styles.checkIcon} />
+            <div className={styles.optionContent}>{option.content}</div>
+          </ListboxOption>
+        ))}
+      </ListboxOptions>
+    </Listbox>
   );
 };
 

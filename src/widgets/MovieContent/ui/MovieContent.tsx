@@ -18,10 +18,7 @@ const MovieContent = () => {
 
   return (
     <>
-      <div
-        data-testid={"movie-page"}
-        className="min-h-screen px-4 py-8 max-w-4xl mx-auto"
-      >
+      <div data-testid={"movie-page"} className="max-w-4xl mx-auto">
         <h1
           data-testid={"movie-title"}
           className="text-3xl font-bold mb-4 text-center"
@@ -41,7 +38,7 @@ const MovieContent = () => {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm md:text-base">
-          <div>
+          <section aria-label={t("основная_информация")}>
             <p>
               <strong>{t("год")}</strong> {data?.Year}
             </p>
@@ -66,9 +63,9 @@ const MovieContent = () => {
             <p>
               <strong>{t("актеры")}</strong> {data?.Actors}
             </p>
-          </div>
+          </section>
 
-          <div>
+          <section aria-label={t("дополнительная_информация")}>
             <p>
               <strong>{t("описание")}</strong> {data?.Plot}
             </p>
@@ -110,7 +107,7 @@ const MovieContent = () => {
             <p>
               <strong>Metascore:</strong> {data?.Metascore}
             </p>
-          </div>
+          </section>
         </div>
       </div>
     </>

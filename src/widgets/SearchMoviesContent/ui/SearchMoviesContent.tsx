@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { InfiniteScrollWrapper } from "@/widgets/InfiniteScrollWrapper";
 import {
   SearchMoviesInput,
   selectSearch,
@@ -13,7 +14,6 @@ import {
 } from "@/features/MoviesList";
 import { InfScrollLoadMoreBtn } from "@/features/InfScrollLoadMoreBtn";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import { InfiniteScrollWrapper } from "@/shared/ui/InfiniteScrollWrapper";
 
 const SearchMoviesContent = () => {
   const search = useAppSelector(selectSearch);

@@ -1,5 +1,5 @@
 import { getUniqueMovies } from "./getUniqueMovies";
-import { Movie } from "../../model/types/movie";
+import { Movie } from "@/entities/MovieTile";
 
 describe("getUniqueMovies", () => {
   const mockMovies1: Movie[] = [

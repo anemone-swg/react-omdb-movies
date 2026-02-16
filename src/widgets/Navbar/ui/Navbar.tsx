@@ -8,8 +8,11 @@ const Navbar = () => {
   const { t } = useTranslation();
 
   return (
-    <>
-      <nav className="px-4 py-4 flex justify-between items-center">
+    <header role="banner">
+      <nav
+        role="navigation"
+        className="px-4 py-4 flex justify-between items-center"
+      >
         <div className="text-2xl font-bold select-none">OmdbMovies</div>
 
         <div className="flex space-x-4">
@@ -30,7 +33,7 @@ const Navbar = () => {
         </div>
       </nav>
       <hr className="border-navbar-hr border-t" />
-    </>
+    </header>
   );
 };
 

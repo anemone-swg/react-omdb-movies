@@ -30,6 +30,17 @@ const config: Config = {
   },
   setupFilesAfterEnv: ["<rootDir>/setupJest.ts"],
   transformIgnorePatterns: ["node_modules/(?!react-error-boundary)"],
+  reporters: [
+    "default",
+    [
+      "jest-html-reporters",
+      {
+        publicPath: "<rootDir>/reports/unit",
+        filename: "report.html",
+        openReport: true,
+      },
+    ],
+  ],
 };
 
 export default config;

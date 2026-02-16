@@ -1,0 +1,68 @@
+.select {
+  position: relative;
+  width: 30%;
+}
+
+.selectButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.375rem 2rem 0.375rem 0.75rem;
+  text-align: left;
+  cursor: pointer;
+  background-color: var(--background-color-select);
+  border-radius: 0.5rem;
+}
+
+.chevron {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.options {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  max-height: 15rem;
+  padding: 0.25rem;
+  margin-top: 0.25rem;
+  overflow-y: auto;
+  background-color: var(--background-color-select);
+  border-radius: 0.5rem;
+  transition: opacity 0.1s ease-in;
+}
+
+.option {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.375rem 0.75rem;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 0.5rem;
+}
+
+.option:hover {
+  background-color: var(--background-color-option-hover);
+}
+
+.optionSelected {
+  font-weight: 600;
+}
+
+.checkIcon {
+  visibility: hidden;
+}
+
+.optionSelected .checkIcon {
+  visibility: visible;
+}
+
+.optionContent {
+  font-size: 0.875rem;
+}

@@ -4,25 +4,6 @@ import { contentType } from "@/shared/types/contentType";
 
 const moviesListApi = baseApi.injectEndpoints({
   endpoints: (create) => ({
-    // getMovies: create.query<
-    //   SearchMoviesResponse,
-    //   {
-    //     search: string;
-    //     page?: number;
-    //     type?: contentType;
-    //     year?: number | undefined;
-    //   }
-    // >({
-    //   query: ({ search, page = 1, type, year }) => ({
-    //     url: "",
-    //     params: {
-    //       s: search,
-    //       page,
-    //       ...(type ? { type } : {}),
-    //       ...(year ? { y: year } : {}),
-    //     },
-    //   }),
-    // }),
     getMovies: create.infiniteQuery<
       SearchMoviesResponse,
       { search: string; type?: contentType; year?: number | undefined },

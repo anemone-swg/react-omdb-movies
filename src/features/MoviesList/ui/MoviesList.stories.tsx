@@ -1,6 +1,6 @@
 import { ErrorBoundary } from "react-error-boundary";
 import type { Meta, StoryObj } from "@storybook/react-webpack5";
-import type { Movie } from "../model/types/movie";
+import type { Movie } from "@/entities/MovieTile";
 import MoviesList from "./MoviesList";
 import MoviesListFallback from "./MoviesListFallback";
 

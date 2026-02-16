@@ -4,7 +4,7 @@
   "ошибка_при_загрузке": "Error loading",
   "поиск_фильмов": "Search for movies",
   "найти": "Find",
-  "все_поиск": "All",
+  "все_поиск": "All types",
   "фильмы_поиск": "Movies",
   "сериалы_поиск": "Serials",
   "эпизоды_поиск": "Episodes",
@@ -33,5 +33,7 @@
   "попробовать_снова": "Try again",
   "нечего_загружать": "Nothing more to load",
   "загрузить_больше": "Load more",
-  "загрузка": "Loading..."
+  "загрузка": "Loading...",
+  "основная_информация": "Main information",
+  "дополнительная_информация": "Additional information"
 }

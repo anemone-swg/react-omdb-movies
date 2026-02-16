@@ -1,4 +1,4 @@
-import type { Movie } from "../../model/types/movie";
+import type { Movie } from "@/entities/MovieTile";
 
 export const getUniqueMovies = (data: Movie[]) =>
   data.filter(
